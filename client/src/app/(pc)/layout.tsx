@@ -3,9 +3,5 @@ export default function PCLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="ja">
-      <body className="container mx-auto px-5">{children}</body>
-    </html>
-  );
+  return <div className="relative w-full h-full">{children}</div>;
 }
