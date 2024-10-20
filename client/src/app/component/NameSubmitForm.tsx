@@ -30,7 +30,7 @@ const NameSubmitForm: React.FC<UserNameInputProps> = ({ maxLength }) => {
       <div className="w-full">
         <p className="text-[12px] leading-[21.6px]">ユーザーネーム登録</p>
         <input
-          className="w-full font-normal text-[#FFF] placeholder-[#79747E] bg-[#333] border-[1px] border-solid border-[#FFF] rounded-[8px] p-[8px_10px] leading-[28.8px] focus:outline-none focus:border-theme-pink"
+          className="w-full font-normal caret-theme-pink text-[#FFF] placeholder-[#79747E] bg-[#333] border-[1px] border-solid border-[#FFF] rounded-[8px] p-[8px_10px] leading-[28.8px] focus:outline-none focus:border-theme-pink"
           placeholder="ユーザーネームを入力"
           value={inputValue}
           onChange={handleChange}
