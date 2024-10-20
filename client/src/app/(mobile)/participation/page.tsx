@@ -1,5 +1,5 @@
 import React from "react";
-import NameSubmitForm from "@/app/component/NameSubmitForm";
+import NameSubmitForm from "@/app/components/NameSubmitForm";
 
 const page = () => {
   return (
