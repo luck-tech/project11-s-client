@@ -13,7 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning className="font-['Note_Sans_JP']">
+        {children}
+      </body>
     </html>
   );
 }
