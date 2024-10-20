@@ -12,8 +12,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="font-['Note_Sans_JP']">{children}</body>
+    <html lang="ja">
+      <body suppressHydrationWarning className="font-['Note_Sans_JP']">
+        {children}
+      </body>
     </html>
   );
 }
