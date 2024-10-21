@@ -12,11 +12,8 @@ export const BackButton = () => {
   };
 
   return (
-    <div className="flex items-center text-[18px] leading-[32.4px]">
-      <IconButton onClick={handleBackClick} aria-label="戻る">
-        <ArrowBackIcon className="text-theme-green" />
-      </IconButton>
-      <p className="text-theme-green">AI裁判官</p>
-    </div>
+    <IconButton onClick={handleBackClick} aria-label="戻る">
+      <ArrowBackIcon className="text-theme-green" />
+    </IconButton>
   );
 };
