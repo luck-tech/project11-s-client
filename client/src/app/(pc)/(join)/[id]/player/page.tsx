@@ -1,3 +1,5 @@
+import { QRCodeSVG } from "qrcode.react";
+
 const JoinPlayer = () => {
   return (
     <div className="text-white text-center flex flex-col justify-center items-center min-h-screen gap-10 md:gap-36 py-8">
@@ -13,14 +15,24 @@ const JoinPlayer = () => {
             <p>Player A</p>
             <p>原告はこちら</p>
           </div>
-          <div className="aspect-square max-w-[450px] lg:w-[450px] bg-neutral-100 rounded-lg"></div>
+          <div className="aspect-square max-w-[450px] lg:w-[450px] bg-neutral-100 rounded-lg">
+            <QRCodeSVG
+              value={`http://localhost:3000/participation?user=a`}
+              className="w-full h-full p-6"
+            />
+          </div>
         </div>
         <div>
           <div className="text-4xl lg:text-5xl font-bold text-theme-blue space-y-3 bg-neutral-100 px-10 py-5 rounded-[50px] mb-10">
             <p>Player B</p>
             <p>被告はこちら</p>
           </div>
-          <div className="aspect-square max-w-[450px] lg:w-[450px] bg-neutral-100 rounded-lg"></div>
+          <div className="aspect-square max-w-[450px] lg:w-[450px] bg-neutral-100 rounded-lg">
+            <QRCodeSVG
+              value={`http://localhost:3000/participation?user=b`}
+              className="w-full h-full p-6"
+            />
+          </div>
         </div>
       </div>
     </div>
