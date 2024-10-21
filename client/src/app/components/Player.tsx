@@ -8,8 +8,8 @@ export const Player = ({ player }: PlayerProps) => {
   const themeClass = player === "A" ? "text-theme-pink" : "text-theme-blue";
 
   return (
-    <h3 className={`text-[18px] leading-[32.4px] ${themeClass}`}>
-      あなたは<span>{playerText}</span>です
-    </h3>
+    <span className={`text-[18px] leading-[32.4px] ${themeClass}`}>
+      {playerText}
+    </span>
   );
 };
