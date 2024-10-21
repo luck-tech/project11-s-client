@@ -1,4 +1,4 @@
-import BgImage from "@/app/components/bgImage";
+import BgImage from "@/app/components/BgImage";
 
 export default function PCLayout({
   children,
