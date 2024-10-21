@@ -6,7 +6,7 @@ const Participation =
   (/*{ searchParams }: { searchParams: { player: string } }*/) => {
     // TODO: URLからparmsを取得し、Player, SubmitFormにprops渡し
     //const player = searchParams.player;
-    const player = "B";
+    const player = "A";
     if (!player) return;
 
     return (

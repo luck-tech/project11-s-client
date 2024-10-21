@@ -29,12 +29,11 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
       if (pathname.includes("/participation")) {
         router.push(`/claim?player=${player}`);
       } else {
-        router.push("/waiting");
+        router.push(`/waiting?player=${player}`);
       }
     }
   };
 
-  // playerに応じてテーマクラスを動的に設定
   const themeClass = player === "A" ? "theme-pink" : "theme-blue";
 
   return (
