@@ -34,7 +34,13 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
     }
   };
 
-  const themeClass = player === "A" ? "theme-pink" : "theme-blue";
+  const themeClass =
+    player === "A"
+      ? "theme-pink"
+      : player === "B"
+      ? "theme-blue"
+      : "theme-green";
+  console.log(themeClass);
 
   return (
     <div className="flex-col flex gap-[24px] w-full">
