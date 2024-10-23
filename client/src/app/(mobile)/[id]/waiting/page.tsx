@@ -1,8 +1,10 @@
-import React from "react";
+"use client";
 import { Player } from "@/app/components/Player";
+import { useSearchParams } from "next/navigation";
 
-const Waiting = ({ searchParams }: { searchParams: { player: string } }) => {
-  const player = searchParams.player;
+const Waiting = () => {
+  const searchParams = useSearchParams();
+  const player = searchParams.get("player");
   if (!player) return;
 
   return (
