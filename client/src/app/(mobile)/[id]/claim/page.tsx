@@ -1,10 +1,12 @@
-import React from "react";
+"use client";
 import { Player } from "@/app/components/Player";
 import SubmitForm from "@/app/components/SubmitForm";
 import { BackButton } from "@/app/components/BackButton";
+import { useSearchParams } from "next/navigation";
 
-const Claim = ({ searchParams }: { searchParams: { player: string } }) => {
-  const player = searchParams.player;
+const Claim = () => {
+  const searchParams = useSearchParams();
+  const player = searchParams.get("player");
   if (!player) return;
 
   return (
