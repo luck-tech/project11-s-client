@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSetRecoilState } from "recoil";
+import { trialState } from "@/app/TrialState";
 
-const API_URL = "/";
+const API_URL = "http://localhost:8000";
 
 async function createTrial(subject: string) {
   const res = await fetch(`${API_URL}/trial/create/`, {
@@ -10,11 +12,11 @@ async function createTrial(subject: string) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ trial_subject: subject }),
+    body: JSON.stringify({ subject: subject }),
   });
 
-  if (!res) {
-    throw new Error("failed create trial");
+  if (!res.ok) {
+    throw new Error(`failed create trial${res.status}`);
   }
 
   return await res.json();
@@ -24,12 +26,14 @@ const Top = () => {
   const [subject, setSubject] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const setTrial = useSetRecoilState(trialState);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     try {
       const trial = await createTrial(subject);
+      setTrial({ subject: trial.subject });
       router.push(`${trial.trial_id}/player`);
     } catch (error) {
       console.error("裁判の作成に失敗しました", error);
