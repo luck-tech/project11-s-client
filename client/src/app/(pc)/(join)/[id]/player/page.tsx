@@ -11,25 +11,25 @@ const JoinPlayer = () => {
       </div>
       <div className="flex flex-col md:flex-row gap-10 md:gap-0 items-center justify-evenly w-full">
         <div>
-          <div className="text-4xl lg:text-5xl font-bold text-[#A71AAD] space-y-3 bg-neutral-100 px-10 py-5 rounded-[50px] mb-10">
+          <div className="text-4xl lg:text-5xl font-bold text-[#A71AAD] space-y-3 bg-white px-10 py-5 rounded-[50px] mb-10">
             <p>Player A</p>
             <p>原告はこちら</p>
           </div>
-          <div className="aspect-square max-w-[450px] lg:w-[450px] bg-neutral-100 rounded-lg">
+          <div className="aspect-square max-w-[450px] lg:w-[450px] bg-white rounded-lg">
             <QRCodeSVG
-              value={`http://localhost:3000/participation?user=a`}
+              value={`http://localhost:3000/participation?player=A`}
               className="w-full h-full p-6"
             />
           </div>
         </div>
         <div>
-          <div className="text-4xl lg:text-5xl font-bold text-theme-blue space-y-3 bg-neutral-100 px-10 py-5 rounded-[50px] mb-10">
+          <div className="text-4xl lg:text-5xl font-bold text-theme-blue space-y-3 bg-white px-10 py-5 rounded-[50px] mb-10">
             <p>Player B</p>
             <p>被告はこちら</p>
           </div>
-          <div className="aspect-square max-w-[450px] lg:w-[450px] bg-neutral-100 rounded-lg">
+          <div className="aspect-square max-w-[450px] lg:w-[450px] bg-white rounded-lg">
             <QRCodeSVG
-              value={`http://localhost:3000/participation?user=b`}
+              value={`http://localhost:3000/participation?player=B`}
               className="w-full h-full p-6"
             />
           </div>
