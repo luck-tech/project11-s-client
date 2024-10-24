@@ -1,11 +1,7 @@
 import React from "react";
 import { IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-
-interface CommentFormProps {
-  message: string;
-  setMessage: (message: string) => void;
-}
+import { CommentFormProps } from "@/app/types/mobile";
 
 export const CommentForm = ({ message, setMessage }: CommentFormProps) => {
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

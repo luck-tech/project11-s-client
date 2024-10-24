@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+//import axios from "axios";
 import { ChatBubble } from "@/app/components/ChatBubble";
 import { CommentForm } from "@/app/components/CommentForm";
 import { Player } from "@/app/components/Player";
 import SubmitForm from "@/app/components/SubmitForm";
+import CalculateTime from "@/app/hooks/CalculateTime";
+import mockMessages from "@/app/components/MockData.json";
+import { TabPanelProps } from "@/app/types/mobile";
+import { ChatResponseProps } from "@/app/types/mobile";
 
-interface TabPanelProps {
-  value: number;
-  index: number;
-  message: string;
-  setMessage: (message: string) => void;
-  player: string;
-}
+const TabPanel = ({ value, index, player }: TabPanelProps) => {
+  const [chatMessages, setChatMessages] = useState<ChatResponseProps[]>([]);
+  const [message, setMessage] = useState("");
 
-const TabPanel = (props: TabPanelProps) => {
-  const { value, index, message, setMessage, player, ...other } = props;
+  useEffect(() => {
+    if (index === 0) {
+      // TODO: GETリクエストでチャットメッセージを取得
+      /*axios.get(`/chat/${chat_id}/`).then((response) => {
+        setChatMessages(response.data);
+      });*/
+      setChatMessages(mockMessages);
+    }
+  }, [index]);
 
   return (
     <div
@@ -21,7 +29,6 @@ const TabPanel = (props: TabPanelProps) => {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      {...other}
       className={`${
         value === index ? "flex-grow h-full flex flex-col" : "hidden"
       }`}
@@ -30,14 +37,17 @@ const TabPanel = (props: TabPanelProps) => {
         <div className="flex-grow flex flex-col h-full">
           {index === 0 ? (
             // タブ 0 (参加者コメント)
-            <div className="flex flex-col flex-grow">
-              <ChatBubble
-                username="user_name1"
-                message="Aさんの主張についてコメントします"
-                time="3分"
-                color="bg-pink-300"
-              />
-              <CommentForm message={message} setMessage={setMessage} />
+            <div className="flex flex-col flex-grow overflow-y-auto">
+              {chatMessages.map((chat) => (
+                <ChatBubble
+                  key={chat.message_id}
+                  username={chat.player_name}
+                  message={chat.message}
+                  time={CalculateTime(chat.created_at)}
+                  role={chat.player_role}
+                  player={player}
+                />
+              ))}
             </div>
           ) : index === 1 ? (
             // タブ 1 (主張編集)
@@ -49,6 +59,11 @@ const TabPanel = (props: TabPanelProps) => {
               <SubmitForm maxLength={100} player={player} />
             </div>
           ) : null}
+          {index === 0 && (
+            <div className="flex-shrink-0">
+              <CommentForm message={message} setMessage={setMessage} />
+            </div>
+          )}
         </div>
       )}
     </div>

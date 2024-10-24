@@ -2,11 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-
-interface UserNameInputProps {
-  maxLength: number;
-  player: string;
-}
+import { UserNameInputProps } from "@/app/types/mobile";
 
 const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
   const [inputValue, setInputValue] = useState("");
@@ -35,9 +31,9 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
   };
 
   const themeClass =
-    player === "A"
+    player === "plaintiff"
       ? "theme-pink"
-      : player === "B"
+      : player === "defendant"
       ? "theme-blue"
       : "theme-green";
 
