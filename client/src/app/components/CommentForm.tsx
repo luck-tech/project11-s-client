@@ -17,7 +17,7 @@ export const CommentForm = ({ message, setMessage }: CommentFormProps) => {
     setMessage("");
   };
   return (
-    <div className="my-[27px] font-normal flex bg-[#79747E] rounded-[12px_12px_0_0] p-4 gap-1 items-center">
+    <div className="my-[27px] font-normal flex bg-[#79747E] rounded-[12px_12px_0_0] p-4 gap-1 items-center self-end w-full">
       <input
         type="text"
         placeholder="コメントを記入してください"

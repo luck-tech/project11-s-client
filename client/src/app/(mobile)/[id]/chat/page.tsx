@@ -2,11 +2,7 @@
 
 import React, { useState } from "react";
 import { Tabs, Tab } from "@mui/material";
-import { ChatBubble } from "@/app/components/ChatBubble";
 import TabPanel from "@/app/components/TabPanel";
-import { CommentForm } from "@/app/components/CommentForm";
-import { Player } from "@/app/components/Player";
-import SubmitForm from "@/app/components/SubmitForm";
 import { useSearchParams } from "next/navigation";
 
 const Chat = () => {
@@ -57,31 +53,20 @@ const Chat = () => {
         />
       </Tabs>
 
-      <TabPanel value={value} index={0}>
-        <div className="flex flex-col flex-grow">
-          <div className="flex-grow">
-            <ChatBubble
-              username="user_name1"
-              message="Aさんの主張についてコメントします"
-              time="3分"
-              color="bg-pink-300"
-            />
-          </div>
-          <div className="self-end w-full">
-            <CommentForm message={message} setMessage={setMessage} />
-          </div>
-        </div>
-      </TabPanel>
-
-      <TabPanel value={value} index={1}>
-        <div className="p-[36px_40px] flex flex-col gap-[54px] items-center justify-center">
-          <div className="flex flex-col items-center gap-4">
-            <Player player={player} />
-            <p>主張内容を入力してください</p>
-          </div>
-          <SubmitForm maxLength={100} player={player} />
-        </div>
-      </TabPanel>
+      <TabPanel
+        value={value}
+        index={0}
+        message={message}
+        setMessage={setMessage}
+        player={player}
+      />
+      <TabPanel
+        value={value}
+        index={1}
+        message={message}
+        setMessage={setMessage}
+        player={player}
+      />
     </div>
   );
 };
