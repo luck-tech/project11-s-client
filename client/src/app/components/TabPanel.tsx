@@ -14,8 +14,13 @@ const TabPanel = (props: TabPanelProps) => {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
+      className={`${
+        value === index ? "flex-grow h-full flex flex-col" : "hidden"
+      }`}
     >
-      {value === index && <div>{children}</div>}
+      {value === index && (
+        <div className="flex-grow flex flex-col h-full">{children}</div>
+      )}
     </div>
   );
 };

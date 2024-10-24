@@ -19,48 +19,58 @@ const Chat = () => {
     setValue(newValue);
   };
   // TODO: trial/game_stateにリクエストを1秒間隔で送り、game_stateがshow_final_claim_and_judgeになったら、最終主張画面に飛ばす
+  const themeClass =
+    player === "A" ? "#F22CFB" : player === "B" ? "#1BCDFD" : "#88F4D5";
 
   if (!player) return;
   return (
-    <div className="">
+    <div className="w-full p-[20px_0] flex-grow flex flex-col">
       <Tabs
         value={value}
         onChange={handleTabChange}
         aria-label="chat tabs"
         centered
-        className="font-medium"
+        className="w-full font-medium"
+        sx={{
+          "& .MuiTabs-indicator": {
+            backgroundColor: themeClass,
+          },
+        }}
       >
-        <Tab label="参加者コメント" />
-        <Tab label="主張編集" />
+        <Tab
+          label="参加者コメント"
+          className="w-6/12 p-[14px_16px] text-[12px] text-white"
+          sx={{
+            "&.Mui-selected": {
+              color: themeClass,
+            },
+          }}
+        />
+        <Tab
+          label="主張編集"
+          className="w-6/12 text-[12px] text-white"
+          sx={{
+            "&.Mui-selected": {
+              color: player === "A" ? "#F22CFB" : "#1BCDFD",
+            },
+          }}
+        />
       </Tabs>
+
       <TabPanel value={value} index={0}>
-        <div className="">
-          <ChatBubble
-            username="user_name1"
-            message="Aさんの主張についてコメントします"
-            time="3分"
-            color="bg-pink-300"
-          />
-          <ChatBubble
-            username="user_name2"
-            message="Aさんの主張についてコメントします"
-            time="3分"
-            color="bg-teal-300"
-          />
-          <ChatBubble
-            username="user_name2"
-            message="Aさんの主張についてコメントします"
-            time="2分"
-            color="bg-blue-300"
-          />
-          <ChatBubble
-            username="user_name3"
-            message="コメントテキストが長い場合の表示例です。"
-            time="1分"
-            color="bg-pink-400"
-          />
+        <div className="flex flex-col flex-grow">
+          <div className="flex-grow">
+            <ChatBubble
+              username="user_name1"
+              message="Aさんの主張についてコメントします"
+              time="3分"
+              color="bg-pink-300"
+            />
+          </div>
+          <div className="self-end w-full">
+            <CommentForm message={message} setMessage={setMessage} />
+          </div>
         </div>
-        <CommentForm message={message} setMessage={setMessage} />
       </TabPanel>
 
       <TabPanel value={value} index={1}>

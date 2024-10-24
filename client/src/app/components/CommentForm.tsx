@@ -17,15 +17,15 @@ export const CommentForm = ({ message, setMessage }: CommentFormProps) => {
     setMessage("");
   };
   return (
-    <div className="font-normal">
+    <div className="my-[27px] font-normal flex bg-[#79747E] rounded-[12px_12px_0_0] p-4 gap-1 items-center">
       <input
         type="text"
         placeholder="コメントを記入してください"
         value={message}
         onChange={handleMessageChange}
-        className=""
+        className="focus:outline-none flex-grow h-[24px] placeholder-white bg-[#79747E]"
       />
-      <IconButton onClick={handleSendMessage} color="primary">
+      <IconButton onClick={handleSendMessage} className="text-white h-[24px]">
         <SendIcon />
       </IconButton>
     </div>
