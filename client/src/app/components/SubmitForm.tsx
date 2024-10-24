@@ -2,11 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-
-interface UserNameInputProps {
-  maxLength: number;
-  player: string;
-}
+import { UserNameInputProps } from "@/app/types/mobile";
 
 const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
   const [inputValue, setInputValue] = useState("");
@@ -26,7 +22,7 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
   const handleSubmit = () => {
     if (inputValue.trim().length > 0) {
       // TODO: 内容のpost及びエラーハンドリング
-      if (pathname.includes("/participation")) {
+      if (pathname.includes("/participation") && player != "C") {
         router.push(`/claim?player=${player}`);
       } else {
         router.push(`/waiting?player=${player}`);
@@ -35,20 +31,19 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
   };
 
   const themeClass =
-    player === "A"
+    player === "plaintiff"
       ? "theme-pink"
-      : player === "B"
+      : player === "defendant"
       ? "theme-blue"
       : "theme-green";
-  console.log(themeClass);
 
   return (
     <div className="flex-col flex gap-[24px] w-full">
       <div className="w-full">
         <p className="text-[12px] leading-[21.6px]">
-          {pathname.includes("/claim") ? "主張内容" : "ユーザーネーム登録"}
+          {maxLength == 100 ? "主張内容" : "ユーザーネーム登録"}
         </p>
-        {pathname.includes("/claim") ? (
+        {maxLength == 100 ? (
           <textarea
             className={`w-full font-normal caret-${themeClass} text-[#FFF] placeholder-[#79747E] bg-[#333] border-[1px] border-solid border-[#FFF] rounded-[8px] p-[8px_10px] leading-[28.8px] focus:outline-none focus:border-${themeClass}`}
             placeholder="主張内容を入力してください"
@@ -78,7 +73,7 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
         onClick={handleSubmit}
         disabled={inputValue.trim().length === 0} // 入力がない場合は無効
       >
-        {pathname.includes("/claim") ? "送信する" : "参加する"}
+        {maxLength == 100 ? "送信する" : "参加する"}
       </button>
     </div>
   );

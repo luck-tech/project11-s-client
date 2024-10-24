@@ -17,9 +17,9 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        "theme-pink": "#F22CFB",
-        "theme-blue": "#1BCDFD",
-        "theme-green": "#88F4D5",
+        "theme-pink": "#E854AC",
+        "theme-blue": "#5193E0",
+        "theme-green": "#49C7B0",
       },
     },
   },

@@ -6,6 +6,7 @@ const Waiting = () => {
   const searchParams = useSearchParams();
   const player = searchParams.get("player");
   if (!player) return;
+  // TODO: trial/game_stateにリクエストを1秒間隔で送り、game_stateがdiscussionになったらchatに飛ばす
 
   return (
     <>
