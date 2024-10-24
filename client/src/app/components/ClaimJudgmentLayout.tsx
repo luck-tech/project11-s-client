@@ -7,15 +7,15 @@ const ClaimJudgmentLayout = ({
   content,
   time,
 }: {
-  user: "A" | "B" | "AI";
+  user: string;
   title: string;
   content: string;
   time?: { min: number; sec: number };
 }) => {
   let color: "pink" | "blue" | "green";
-  if (user === "A") {
+  if (user === "plaintiff") {
     color = "pink";
-  } else if (user === "B") {
+  } else if (user === "defendant") {
     color = "blue";
   } else {
     color = "green";

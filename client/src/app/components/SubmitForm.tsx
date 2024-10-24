@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useParams } from "next/navigation";
 import { UserNameInputProps } from "@/app/types/mobile";
 
 const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
   const [inputValue, setInputValue] = useState("");
   const router = useRouter();
   const pathname = usePathname();
+  const { id }: { id: string } = useParams();
 
   const handleChange = (
     e:
@@ -19,13 +20,44 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (inputValue.trim().length > 0) {
       // TODO: 内容のpost及びエラーハンドリング
-      if (pathname.includes("/participation") && player != "C") {
-        router.push(`/claim?player=${player}`);
-      } else {
-        router.push(`/waiting?player=${player}`);
+      if (pathname.includes("/participation")) {
+        try {
+          const joinPlayer = await createPlayer(id, player, inputValue);
+          console.log(joinPlayer);
+          if (player === "plaintiff" || player === "defendant") {
+            sessionStorage.setItem(
+              "player",
+              JSON.stringify({
+                playerId: joinPlayer.player_id,
+                mainChatId: joinPlayer.main_chat_id,
+              })
+            );
+            router.push(`/${id}/claim?player=${player}`);
+          } else {
+            sessionStorage.setItem(
+              "spectator",
+              JSON.stringify({
+                playerId: joinPlayer.player_id,
+                mainChatId: joinPlayer.main_chat_id,
+                subChatId: joinPlayer.sub_chat_id,
+              })
+            );
+            router.push(`/${id}/waiting?player=${player}`);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      } else if (pathname.includes("/claim")) {
+        try {
+          const claim = await createClaim(id, inputValue);
+          console.log(claim);
+          router.push(`/${id}/waiting?player=${player}`);
+        } catch (error) {
+          console.error(error);
+        }
       }
     }
   };
@@ -80,3 +112,45 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
 };
 
 export default SubmitForm;
+
+const API_URL = "http://localhost:8000";
+
+async function createPlayer(id: string, role: string, playerName: string) {
+  const res = await fetch(`${API_URL}/trial/player/create/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      trial_id: id,
+      role: role,
+      player_name: playerName,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`failed create player ${res.status}`);
+  }
+
+  return await res.json();
+}
+
+async function createClaim(id: string, playerName: string) {
+  const player = sessionStorage.getItem("player");
+  if (!player) throw new Error(`playerId is not available`);
+  const playerId = JSON.parse(player);
+
+  const res = await fetch(`${API_URL}/trial/claim/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      trial_id: id,
+      player_id: playerId.playerId,
+      claim: playerName,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`failed create player ${res.status}`);
+  }
+
+  return await res.json();
+}

@@ -26,50 +26,6 @@ const BgImage = ({
       />
       {balance && (
         <div className="fixed inset-0 -z-40">
-          {/* 金槌↓ */}
-          {/* <svg
-            width="1080"
-            height="1080"
-            viewBox="0 0 1080 1080"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="mx-auto"
-          >
-            <g filter="url(#filter0_f_68_987)">
-              <path
-                d="M839.565 299.565L775.935 235.935M616.815 522.315L254.07 948.69C247.384 955.378 239.446 960.683 230.709 964.302C221.973 967.921 212.609 969.784 203.152 969.784C193.696 969.784 184.332 967.921 175.595 964.302C166.859 960.683 158.921 955.378 152.235 948.69L126.81 923.22C113.317 909.719 105.738 891.412 105.738 872.325C105.738 853.238 113.317 834.931 126.81 821.43L553.185 458.64M712.26 617.76L871.38 458.64M457.74 363.24L616.815 204.12M387.72 242.28L495.9 134.1C502.651 127.354 511.804 123.564 521.347 123.564C530.891 123.564 540.044 127.354 546.795 134.1L941.4 528.66C948.146 535.411 951.936 544.564 951.936 554.108C951.936 563.651 948.146 572.804 941.4 579.555L833.175 687.78C826.424 694.526 817.271 698.316 807.727 698.316C798.184 698.316 789.031 694.526 782.28 687.78L387.72 293.175C380.987 286.426 377.207 277.283 377.207 267.75C377.207 258.217 380.987 249.074 387.72 242.325"
-                stroke={hammerColor}
-                strokeWidth="67.5"
-                strokeMiterlimit="10"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </g>
-            <defs>
-              <filter
-                id="filter0_f_68_987"
-                x="61.9883"
-                y="79.8142"
-                width="933.697"
-                height="933.72"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="BackgroundImageFix"
-                  result="shape"
-                />
-                <feGaussianBlur
-                  stdDeviation="5"
-                  result="effect1_foregroundBlur_68_987"
-                />
-              </filter>
-            </defs>
-          </svg> */}
-
           {/* 天秤↓ */}
           <svg
             width="1080"
