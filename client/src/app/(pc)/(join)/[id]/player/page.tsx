@@ -1,10 +1,50 @@
 "use client";
 import { trialState } from "@/app/TrialState";
+import { useParams, useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
+import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
+
+const API_URL = "http://localhost:8000";
+
+async function gameState(id: string) {
+  const res = await fetch(`${API_URL}/trial/game_state/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ trial_id: id }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`failed create trial${res.status}`);
+  }
+
+  return await res.json();
+}
 
 const JoinPlayer = () => {
   const trial = useRecoilValue(trialState);
+  const { id }: { id: string } = useParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const state = await gameState(id);
+        if (state.state === "show_one_qr_codes") {
+          router.push(`/${id}/spectator`);
+        }
+        console.log(state);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const interval = setInterval(() => {
+      fetchData();
+    }, 3000);
+    fetchData();
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="text-white text-center flex flex-col justify-center items-center min-h-screen gap-10 md:gap-36 py-8">
@@ -21,7 +61,7 @@ const JoinPlayer = () => {
           </div>
           <div className="aspect-square max-w-[450px] lg:w-[450px] bg-white rounded-lg">
             <QRCodeSVG
-              value={`http://localhost:3000/participation?player=A`}
+              value={`http://localhost:3000/${id}/participation?player=plaintiff`}
               className="w-full h-full p-6"
             />
           </div>
@@ -33,7 +73,7 @@ const JoinPlayer = () => {
           </div>
           <div className="aspect-square max-w-[450px] lg:w-[450px] bg-white rounded-lg">
             <QRCodeSVG
-              value={`http://localhost:3000/participation?player=B`}
+              value={`http://localhost:3000/${id}/participation?player=defendant`}
               className="w-full h-full p-6"
             />
           </div>

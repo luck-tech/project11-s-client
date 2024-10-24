@@ -5,16 +5,16 @@ interface PlayerProps {
 }
 export const Player = ({ player }: PlayerProps) => {
   const playerText =
-    player === "A"
+    player === "plaintiff"
       ? "PlayerA(原告)"
-      : player === "B"
+      : player === "defendant"
       ? "PlayerB(被告)"
       : "傍聴人";
 
   const themeClass =
-    player === "A"
+    player === "plaintiff"
       ? "text-theme-pink"
-      : player === "B"
+      : player === "defendant"
       ? "text-theme-blue"
       : "text-theme-green";
 

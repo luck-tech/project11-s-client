@@ -8,7 +8,7 @@ export default function PCLayout({
 }>) {
   return (
     <RecoilRoot>
-      <div className="relative w-full h-full">{children}</div>;
+      <div className="relative w-full h-full">{children}</div>
     </RecoilRoot>
   );
 }

@@ -9,7 +9,7 @@ const PlayerClaim = () => {
   const { time, timeUp, startTime } = useTimer(timeLimit);
   const searchParams = useSearchParams();
   const player = searchParams.get("player");
-  if (!player || (player !== "A" && player !== "B")) return;
+  if (!player || (player !== "plaintiff" && player !== "defendant")) return;
 
   useEffect(() => {
     if (timeUp) {
@@ -22,24 +22,17 @@ const PlayerClaim = () => {
   }, []);
 
   const claim = {
-    A: {
-      type: "Aの主張",
-      content:
-        "被告がSNSにおいて虚偽かつ誹謗中傷にあたる投稿を行った結果、名誉を著しく傷つけられ、 信用が低下しました。",
-    },
-    B: {
-      type: "Bの主張",
-      content:
-        "被告としては、原告が主張するSNSでの投稿は事実に基づいた意見であり、名誉毀損には該当しないと考えています。批判的意見の表明であって、原告を誹謗中傷する目的ではありませんでした。",
-    },
+    type: "Aの主張",
+    content:
+      "被告がSNSにおいて虚偽かつ誹謗中傷にあたる投稿を行った結果、名誉を著しく傷つけられ、 信用が低下しました。",
   };
 
   return (
     <>
       <ClaimJudgmentLayout
         user={player}
-        title={`${claim[player].type}`}
-        content={claim[player].content}
+        title={`${claim.type}`}
+        content={claim.content}
         time={time}
       />
     </>

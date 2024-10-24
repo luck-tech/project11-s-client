@@ -1,10 +1,50 @@
 "use client";
 import { trialState } from "@/app/TrialState";
+import { useParams, useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
+import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
+
+const API_URL = "http://localhost:8000";
+
+async function gameState(id: string) {
+  const res = await fetch(`${API_URL}/trial/game_state/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ trial_id: id }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`failed get game state ${res.status}`);
+  }
+
+  return await res.json();
+}
 
 const JoinSpectator = () => {
   const trial = useRecoilValue(trialState);
+  const { id }: { id: string } = useParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const state = await gameState(id);
+        console.log(state);
+        if (state.state === "show_first_claim_and_judge") {
+          router.push(`/${id}/play/claim?player=plaintiff`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const interval = setInterval(() => {
+      fetchData();
+    }, 3000);
+    fetchData();
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="text-white text-center flex flex-col justify-center items-center min-h-screen gap-10 md:gap-24 py-8">
