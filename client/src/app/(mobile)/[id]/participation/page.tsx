@@ -14,7 +14,7 @@ const Participation = () => {
         <span className="text-theme-green">AI裁判官</span>へようこそ！
       </h3>
       <div className="flex flex-col gap-[16px]">
-        <h3 className={"text-[18px] leading-[32.4px]"}>
+        <h3 className={"text-[18px] leading-[32.4px] text-center"}>
           あなたは
           <Player player={player} />
           です

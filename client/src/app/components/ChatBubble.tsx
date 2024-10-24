@@ -18,20 +18,22 @@ export const ChatBubble = ({
       ? "bg-theme-pink"
       : role === "defendant"
       ? "bg-theme-blue"
-      : "bg-theme-green";
+      : role === "judge"
+      ? "bg-theme-green"
+      : "bg-[#828282]";
 
   if (!player) return;
   return (
     <div className="font-normal p-[0_32px] rounded-lg mt-[20px]">
-      {player !== role && <p className="text-[14px] mb-1">@{username}</p>}
+      {player !== role && <p className="text-[14px] mb-1">{username}</p>}
       <div
         className={`flex gap-[8px] mb-[13px] items-end ${
-          player === role && player != "spectator" ? "flex-row-reverse" : ""
+          player === role ? "flex-row-reverse" : ""
         }`}
       >
         <p
           className={`flex ${themeClass} text-[14px] ${
-            player === role && player != "spectator"
+            player === role
               ? "rounded-[16px_16px_0px_16px]"
               : "rounded-[16px_16px_16px_0px]"
           } p-3`}

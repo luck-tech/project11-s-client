@@ -1,15 +1,15 @@
 [
   {
     "message_id": "123e4567-e89b-12d3-a456-426614174001",
-    "player_name": "Player1",
-    "player_role": "plaintiff",
+    "player_name": "AI裁判官",
+    "player_role": "judge",
     "message": "Aさんの主張について コメントAさんの主張について コメントします",
     "created_at": "2024-10-20T10:35:49.716241+09:00"
   },
   {
     "message_id": "123e4567-e89b-12d3-a456-426614174002",
     "player_name": "Player2",
-    "player_role": "defendant",
+    "player_role": "spectator",
     "message": "Aさんの主張について コメントAさんの主張について コメントします Aさんの主張について コメントAさんの主張について コメントします",
     "created_at": "2024-10-21T10:40:49.716241+09:00"
   },
@@ -22,15 +22,15 @@
   },
   {
     "message_id": "123e4567-e89b-12d3-a456-426614174004",
-    "player_name": "Player1",
-    "player_role": "plaintiff",
+    "player_name": "AI裁判官",
+    "player_role": "judge",
     "message": "Aさんの主張について コメントAさんの主張について コメントします",
     "created_at": "2024-10-22T10:35:49.716241+09:00"
   },
   {
     "message_id": "123e4567-e89b-12d3-a456-426614174005",
     "player_name": "Player2",
-    "player_role": "defendant",
+    "player_role": "spectator",
     "message": "Aさんの主張について コメントAさんの主張について コメントします Aさんの主張について コメントAさんの主張について コメントします",
     "created_at": "2024-10-23T10:40:49.716241+09:00"
   },
