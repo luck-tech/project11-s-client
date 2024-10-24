@@ -1,8 +1,6 @@
 import React from "react";
+import { PlayerProps } from "@/app/types/mobile";
 
-interface PlayerProps {
-  player: string;
-}
 export const Player = ({ player }: PlayerProps) => {
   const playerText =
     player === "plaintiff"
