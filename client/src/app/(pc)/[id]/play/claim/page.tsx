@@ -86,7 +86,7 @@ const PlayerClaim = () => {
           player={player}
           title={title.playerName + title.sentence}
           content={content}
-          time={time}
+          time={{ time: time, timeLimit: timeLimit }}
         />
       )}
     </>
