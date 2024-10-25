@@ -2,20 +2,20 @@ import BgImage from "./BgImage";
 import Timer from "./Timer";
 
 const ClaimJudgmentLayout = ({
-  user,
+  player,
   title,
   content,
   time,
 }: {
-  user: string;
+  player: string;
   title: string;
   content: string;
   time?: { min: number; sec: number };
 }) => {
   let color: "pink" | "blue" | "green";
-  if (user === "plaintiff") {
+  if (player === "plaintiff") {
     color = "pink";
-  } else if (user === "defendant") {
+  } else if (player === "defendant") {
     color = "blue";
   } else {
     color = "green";
