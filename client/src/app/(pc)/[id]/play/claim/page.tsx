@@ -33,7 +33,7 @@ const PlayerClaim = () => {
         user={player}
         title={`${claim.type}`}
         content={claim.content}
-        time={time}
+        time={{ time: time, timeLimit: timeLimit }}
       />
     </>
   );

@@ -10,7 +10,10 @@ const ClaimJudgmentLayout = ({
   user: string;
   title: string;
   content: string;
-  time?: { min: number; sec: number };
+  time?: {
+    time: { min: number; sec: number };
+    timeLimit: { min: number; sec: number };
+  };
 }) => {
   let color: "pink" | "blue" | "green";
   if (user === "plaintiff") {
@@ -22,7 +25,7 @@ const ClaimJudgmentLayout = ({
   }
   return (
     <>
-      <BgImage color={color} balance />
+      <BgImage color={color} />
       <div className="container mx-auto min-h-screen flex flex-col justify-center items-center gap-8">
         <h1
           className={`text-6xl lg:text-[88px] text-center font-bold text-theme-${color}`}
@@ -34,7 +37,7 @@ const ClaimJudgmentLayout = ({
         </p>
         {time && (
           <div className="absolute bottom-0 left-0 p-10">
-            <Timer time={time} />
+            <Timer time={time.time} timeLimit={time.timeLimit} />
           </div>
         )}
       </div>
