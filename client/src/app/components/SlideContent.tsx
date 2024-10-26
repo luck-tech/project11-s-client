@@ -5,7 +5,6 @@ function SlideContent({
 }: {
   slide: { title: string; header: string; content: string };
 }) {
-  // headerの内容に応じてクラス名を切り替え
   const headerClass =
     header === "AI裁判官の主張"
       ? "text-theme-green"
