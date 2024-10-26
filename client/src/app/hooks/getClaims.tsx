@@ -1,6 +1,6 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
-export async function getClaims(id: string, type: string) {
+const getClaims = async (id: string, type: string) => {
   const res = await fetch(`${API_URL}/trial/claims_and_judgments/`, {
     method: "POST",
     headers: {
@@ -14,4 +14,6 @@ export async function getClaims(id: string, type: string) {
   }
 
   return await res.json();
-}
+};
+
+export default getClaims;

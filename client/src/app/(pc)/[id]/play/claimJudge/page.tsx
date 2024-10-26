@@ -7,7 +7,7 @@ import { trialState } from "@/app/TrialState";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { getClaims } from "@/app/hooks/getClaims";
+import getClaims from "@/app/hooks/getClaims";
 
 const ClaimJudge = () => {
   const timeLimit = { min: 1, sec: 0 };
