@@ -2,12 +2,14 @@
 import { useEffect } from "react";
 import BgImage from "./BgImage";
 import Timer from "./Timer";
+import Link from "next/link";
 
 const ClaimJudgmentLayout = ({
   player,
   title,
   content,
   time,
+  linkHref,
 }: {
   player: string;
   title: string;
@@ -16,6 +18,7 @@ const ClaimJudgmentLayout = ({
     time: { min: number; sec: number };
     timeLimit: { min: number; sec: number };
   };
+  linkHref?: string;
 }) => {
   let color: "pink" | "blue" | "green";
   if (player === "plaintiff") {
@@ -65,13 +68,14 @@ const ClaimJudgmentLayout = ({
             <Timer time={time.time} timeLimit={time.timeLimit} />
           </div>
         )}
-        {player === "judge" && (
+        {player === "judge" && linkHref && (
           <>
-            <button
+            <Link
+              href={linkHref}
               className={`text-4xl font-bold leading-snug py-5 px-10 bg-theme-${color} rounded-full my-4 text-black`}
             >
               進む
-            </button>
+            </Link>
             <button
               onClick={handleSpeak}
               className="px-4 py-2 hover:opacity-50"

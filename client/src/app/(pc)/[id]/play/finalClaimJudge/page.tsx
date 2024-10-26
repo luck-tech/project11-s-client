@@ -95,6 +95,7 @@ const FinalClaimJudge = () => {
           player={"judge"}
           title={`AI裁判官の判決`}
           content={content}
+          linkHref={`/${id}/play/trialEnd`}
         />
       ) : claimState === "start" ? (
         <ClaimJudgmentStart
