@@ -1,12 +1,36 @@
 "use client";
 import { Player } from "@/app/components/Player";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Waiting = () => {
+  const router = useRouter();
+  const { id }: { id: string } = useParams();
   const searchParams = useSearchParams();
   const player = searchParams.get("player");
-  if (!player) return;
-  // TODO: trial/game_stateにリクエストを1秒間隔で送り、game_stateがdiscussionになったらchatに飛ばす
+  const API_URL = "http://localhost:8000/";
+
+  if (!player) return null;
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      try {
+        const response = await axios.post(`${API_URL}/api/trial/game_state/`, {
+          trial_id: id,
+        });
+
+        if (response.data.state === "discussion") {
+          clearInterval(interval);
+          router.push(`/${id}/chat?player=${player}`);
+        }
+      } catch (error) {
+        console.error("Error fetching game state:", error);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [id, router]);
 
   return (
     <>
