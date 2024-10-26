@@ -51,7 +51,6 @@ const JoinSpectator = () => {
       <div className="bg-[#828282] px-10 py-5 rounded-xl">
         <h1 className="text-3xl lg:text-[40px] font-medium lg:leading-snug leading-snug">
           {trial.subject}
-          SNSでの名誉毀損による損害賠償請求SNSでの名誉毀損による損害賠償請求SNSでの名誉毀損による損害
         </h1>
       </div>
       <div>
