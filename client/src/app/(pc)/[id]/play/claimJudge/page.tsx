@@ -1,4 +1,5 @@
 "use client";
+
 import ClaimJudgmentLayout from "@/app/components/ClaimJudgmentLayout";
 import ClaimJudgmentStart from "@/app/components/ClaimJudgmentStart";
 import { useTimer } from "@/app/hooks/useTimer";
@@ -6,24 +7,7 @@ import { trialState } from "@/app/TrialState";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
-
-export async function getClaims(id: string, type: string) {
-  const res = await fetch(`${API_URL}/trial/claims_and_judgments/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ trial_id: id, resource_type: type }),
-  });
-
-  if (!res.ok) {
-    throw new Error(`failed get claims ${res.status}`);
-  }
-
-  return await res.json();
-}
+import { getClaims } from "@/app/hooks/getClaims";
 
 const ClaimJudge = () => {
   const timeLimit = { min: 1, sec: 0 };
