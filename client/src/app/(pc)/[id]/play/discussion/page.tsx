@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { useTimer } from "@/app/hooks/useTimer";
 import { useParams } from "next/navigation";
@@ -8,25 +8,41 @@ import Timer from "@/app/components/Timer";
 import useSlides from "@/app/hooks/useSlides";
 import SlideContent from "@/app/components/SlideContent";
 import useSlideInterval from "@/app/hooks/useSlideInterval";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Discussion = () => {
   const { id }: { id: string } = useParams();
   const timeLimit = { min: 5, sec: 0 };
   const { time, timeUp, startTime } = useTimer(timeLimit);
+  const router = useRouter();
 
-  // TODO: /api/trial/game_state/set/にリクエストを送る
   const slides = useSlides(id);
   const currentSlide = useSlideInterval(slides.length, 5000);
 
+  const API_URL = "http://localhost:8000";
+
   useEffect(() => {
     if (timeUp) {
-      // タイムアップ後の処理
+      router.push(`/${id}/play/finalClaimJudge?player=plaintiff`);
     }
   }, [timeUp]);
 
   useEffect(() => {
-    startTime();
-  }, []);
+    const initializeDiscussion = async () => {
+      try {
+        await axios.post(`${API_URL}/api/trial/game_state/set/`, {
+          trial_id: id,
+          state: "discussion",
+        });
+        startTime();
+      } catch (error) {
+        console.error("ゲーム状態の設定に失敗しました:", error);
+      }
+    };
+
+    initializeDiscussion();
+  }, [id, startTime]);
 
   return (
     <div className="pt-[40px] flex-grow flex flex-col">
