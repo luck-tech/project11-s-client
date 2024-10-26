@@ -6,7 +6,7 @@ import { trialState } from "@/app/TrialState";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { getClaims } from "../claimJudge/page";
+import getClaims from "@/app/hooks/getClaims";
 
 const FinalClaimJudge = () => {
   // 最終主張と判決を表示するページ
