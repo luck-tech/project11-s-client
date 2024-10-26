@@ -26,7 +26,7 @@ const ClaimJudgmentStart = ({
   }
   return (
     <>
-      <BgImage color={color} balance />
+      <BgImage color={color} />
       <div className="container mx-auto min-h-screen flex flex-col justify-center items-center gap-8">
         <p className="font-bold text-center leading-normal md:leading-normal lg:leading-normal text-4xl md:text-5xl lg:text-6xl p-10">
           {subject}
@@ -37,10 +37,10 @@ const ClaimJudgmentStart = ({
           {title}
         </h1>
         <button
-          className={`text-4xl py-6 px-20 bg-theme-${color} rounded-full my-10`}
+          className={`text-4xl font-bold leading-snug py-5 px-10 bg-theme-${color} rounded-full my-10`}
           onClick={buttonClick}
         >
-          スタート
+          主張を開始する
         </button>
       </div>
     </>

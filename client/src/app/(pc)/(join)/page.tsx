@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 import { trialState } from "@/app/TrialState";
 
-const API_URL = "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 async function createTrial(subject: string) {
   const res = await fetch(`${API_URL}/trial/create/`, {

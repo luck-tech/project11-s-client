@@ -58,6 +58,18 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
         } catch (error) {
           console.error(error);
         }
+      } else if (
+        pathname.includes("/chat") ||
+        player === "plaintiff" ||
+        player === "defendant"
+      ) {
+        try {
+          const claim = await editClaim(id, inputValue);
+          console.log(claim);
+          setInputValue("");
+        } catch (error) {
+          console.error(error);
+        }
       }
     }
   };
@@ -113,7 +125,7 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
 
 export default SubmitForm;
 
-const API_URL = "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 async function createPlayer(id: string, role: string, playerName: string) {
   const res = await fetch(`${API_URL}/trial/player/create/`, {
@@ -133,7 +145,7 @@ async function createPlayer(id: string, role: string, playerName: string) {
   return await res.json();
 }
 
-async function createClaim(id: string, playerName: string) {
+async function createClaim(id: string, claim: string) {
   const player = sessionStorage.getItem("player");
   if (!player) throw new Error(`playerId is not available`);
   const playerId = JSON.parse(player);
@@ -144,7 +156,29 @@ async function createClaim(id: string, playerName: string) {
     body: JSON.stringify({
       trial_id: id,
       player_id: playerId.playerId,
-      claim: playerName,
+      claim: claim,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`failed create player ${res.status}`);
+  }
+
+  return await res.json();
+}
+
+async function editClaim(id: string, claim: string) {
+  const player = sessionStorage.getItem("player");
+  if (!player) throw new Error(`player is not available`);
+  const playerId = JSON.parse(player);
+
+  const res = await fetch(`${API_URL}/trial/claim/`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      trial_id: id,
+      player_id: playerId.playerId,
+      claim: claim,
     }),
   });
 

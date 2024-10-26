@@ -5,7 +5,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 async function gameState(id: string) {
   const res = await fetch(`${API_URL}/trial/game_state/`, {
@@ -32,7 +32,7 @@ const JoinSpectator = () => {
         const state = await gameState(id);
         console.log(state);
         if (state.state === "show_first_claim_and_judge") {
-          router.push(`/${id}/play/claim?player=plaintiff`);
+          router.push(`/${id}/play/claimJudge?player=plaintiff`);
         }
       } catch (error) {
         console.error(error);
