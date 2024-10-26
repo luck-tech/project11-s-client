@@ -57,7 +57,7 @@ const JoinSpectator = () => {
         </div>
         <div className="aspect-square max-w-[450px] w-full lg:w-[450px] bg-neutral-100 rounded-lg">
           <QRCodeSVG
-            value={`http://localhost:3000/${id}/participation?player=spectator`}
+            value={`https://project7.uni-bo.net/${id}/participation?player=spectator`}
             className="w-full h-full p-6 lg:p-9"
           />
         </div>

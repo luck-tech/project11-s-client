@@ -58,7 +58,7 @@ const JoinPlayer = () => {
           </div>
           <div className="aspect-square max-w-[450px] lg:w-[450px] bg-white rounded-xl">
             <QRCodeSVG
-              value={`http://localhost:3000/${id}/participation?player=plaintiff`}
+              value={`https://project7.uni-bo.net/${id}/participation?player=plaintiff`}
               className="w-full h-full p-6 lg:p-9"
             />
           </div>
@@ -69,7 +69,7 @@ const JoinPlayer = () => {
           </div>
           <div className="aspect-square max-w-[450px] lg:w-[450px] bg-white rounded-xl">
             <QRCodeSVG
-              value={`http://localhost:3000/${id}/participation?player=defendant`}
+              value={`https://project7.uni-bo.net/${id}/participation?player=defendant`}
               className="w-full h-full p-6 lg:p-9"
             />
           </div>
