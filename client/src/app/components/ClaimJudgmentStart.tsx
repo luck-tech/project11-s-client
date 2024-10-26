@@ -14,7 +14,7 @@ const ClaimJudgmentStart = ({
   title: string;
   buttonClick: () => void;
 }) => {
-  const trial = useRecoilValue(trialState);
+  useRecoilValue(trialState);
 
   let color: "pink" | "blue" | "green";
   if (player === "plaintiff") {

@@ -7,9 +7,11 @@ const Waiting = () => {
   const { id }: { id: string } = useParams();
   const searchParams = useSearchParams();
   const player = searchParams.get("player");
-  if (!player) return null;
-
-  useGameState({ trialId: id, player: player });
+  if (player) {
+    useGameState({ trialId: id, player: player });
+  } else {
+    return;
+  }
 
   return (
     <>
