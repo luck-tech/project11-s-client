@@ -52,7 +52,7 @@ const Discussion = () => {
         <Timer time={time} timeLimit={timeLimit} />
         <div className="aspect-square w-[176px] h-[176px] bg-white rounded-lg">
           <QRCodeSVG
-            value={`https://project7.uni-bo.net/${id}/participation?player=spectator`}
+            value={`https://project11-s-client.vercel.app/${id}/participation?player=spectator`}
             className="w-full h-full p-3"
           />
         </div>

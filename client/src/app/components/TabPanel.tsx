@@ -20,7 +20,9 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   const plaintiffAndDefendant = JSON.parse(
     sessionStorage.getItem("plaintiff_and_defendant") || "{}"
   );
+  console.log(plaintiffAndDefendant);
   const spectator = JSON.parse(sessionStorage.getItem("spectator") || "{}");
+  console.log(spectator);
 
   useEffect(() => {
     let chatId = "";
@@ -33,6 +35,8 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
     } else if (index === 1 && player === "spectator") {
       chatId = spectator.subChatId;
     }
+
+    console.log(chatId);
 
     if (!chatId) {
       console.error("Chat ID not found");
