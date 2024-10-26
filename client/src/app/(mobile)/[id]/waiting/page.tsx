@@ -7,10 +7,12 @@ const Waiting = () => {
   const { id }: { id: string } = useParams();
   const searchParams = useSearchParams();
   const player = searchParams.get("player");
-  if (player) {
-    useGameState({ trialId: id, player: player });
-  } else {
-    return;
+
+  // Hookを条件なしで呼び出す
+  useGameState({ trialId: id, player: player || "" });
+
+  if (!player) {
+    return null;
   }
 
   return (
