@@ -22,14 +22,13 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
 
   const handleSubmit = async () => {
     if (inputValue.trim().length > 0) {
-      // TODO: 内容のpost及びエラーハンドリング
       if (pathname.includes("/participation")) {
         try {
           const joinPlayer = await createPlayer(id, player, inputValue);
           console.log(joinPlayer);
           if (player === "plaintiff" || player === "defendant") {
             sessionStorage.setItem(
-              "player",
+              "plaintiff_and_defendant",
               JSON.stringify({
                 playerId: joinPlayer.player_id,
                 mainChatId: joinPlayer.main_chat_id,
@@ -146,9 +145,11 @@ async function createPlayer(id: string, role: string, playerName: string) {
 }
 
 async function createClaim(id: string, claim: string) {
-  const player = sessionStorage.getItem("player");
-  if (!player) throw new Error(`playerId is not available`);
-  const playerId = JSON.parse(player);
+  const plaintiff_and_defendant = sessionStorage.getItem(
+    "plaintiff_and_defendant"
+  );
+  if (!plaintiff_and_defendant) throw new Error(`playerId is not available`);
+  const playerId = JSON.parse(plaintiff_and_defendant);
 
   const res = await fetch(`${API_URL}/trial/claim/`, {
     method: "POST",
@@ -168,9 +169,11 @@ async function createClaim(id: string, claim: string) {
 }
 
 async function editClaim(id: string, claim: string) {
-  const player = sessionStorage.getItem("player");
-  if (!player) throw new Error(`player is not available`);
-  const playerId = JSON.parse(player);
+  const plaintiff_and_defendant = sessionStorage.getItem(
+    "plaintiff_and_defendant"
+  );
+  if (!plaintiff_and_defendant) throw new Error(`player is not available`);
+  const playerId = JSON.parse(plaintiff_and_defendant);
 
   const res = await fetch(`${API_URL}/trial/claim/`, {
     method: "PATCH",

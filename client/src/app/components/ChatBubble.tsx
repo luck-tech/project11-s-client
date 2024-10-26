@@ -1,16 +1,32 @@
 import React, { useState } from "react";
 import { ChatBubbleProps } from "@/app/types/mobile";
+import axios from "axios";
 
 export const ChatBubble = ({
   username,
   message,
   time,
   role,
+  message_id,
   player,
 }: ChatBubbleProps) => {
+  const API_URL = "http://localhost:8000";
+  const mainPlayer = sessionStorage.getItem("player");
+  if (!mainPlayer) throw new Error(`player is not available`);
+  const playerId = JSON.parse(mainPlayer);
+
   const [isLiked, setIsLiked] = useState(false);
-  const handleLikeClick = () => {
-    setIsLiked(!isLiked);
+  const handleLikeClick = async () => {
+    try {
+      await axios.post(
+        `${API_URL}/api/message/${message_id}/${isLiked ? "ungood" : "good"}/`,
+        { player_id: playerId }
+      );
+
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.error("Error updating like status:", error);
+    }
   };
 
   const themeClass =

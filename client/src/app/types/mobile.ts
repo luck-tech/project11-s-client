@@ -3,6 +3,7 @@ export interface ChatBubbleProps {
   message: string;
   time: string;
   role: string;
+  message_id: string;
   player: string;
 }
 
@@ -23,6 +24,8 @@ export interface ChatResponseProps {
 export interface CommentFormProps {
   message: string;
   setMessage: (message: string) => void;
+  setUpdateAt: (updateAt: string) => void;
+  index: number;
 }
 
 export interface UserNameInputProps {
@@ -31,5 +34,10 @@ export interface UserNameInputProps {
 }
 
 export interface PlayerProps {
+  player: string;
+}
+
+export interface UseGameStateProps {
+  trialId: string;
   player: string;
 }

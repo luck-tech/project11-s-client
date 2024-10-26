@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-//import axios from "axios";
+import axios from "axios";
 import { ChatBubble } from "@/app/components/ChatBubble";
 import { CommentForm } from "@/app/components/CommentForm";
 import { Player } from "@/app/components/Player";
 import SubmitForm from "@/app/components/SubmitForm";
 import CalculateTime from "@/app/hooks/CalculateTime";
-import mockMessages from "@/app/components/MockData.json";
-import mockMessages2 from "@/app/components/MockData2.json";
 import { TabPanelProps } from "@/app/types/mobile";
 import { ChatResponseProps } from "@/app/types/mobile";
 
@@ -16,19 +14,59 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   >([]);
   const [judgeComments, setJudgeComments] = useState<ChatResponseProps[]>([]);
   const [message, setMessage] = useState("");
+  const [updateAt, setUpdateAt] = useState("");
+  const [encodedTimestamp, setEncodedTimestamp] = useState("");
+
+  const plaintiffAndDefendant = JSON.parse(
+    sessionStorage.getItem("plaintiff_and_defendant") || "{}"
+  );
+  const spectator = JSON.parse(sessionStorage.getItem("spectator") || "{}");
 
   useEffect(() => {
+    let chatId = "";
+
     if (index === 0) {
-      // TODO: GETリクエストでチャットメッセージを取得
-      /*axios.get(`/chat/${chat_id}/`).then((response) => {
-        setParticipantComments(response.data);
-      });*/
-      setParticipantComments(mockMessages);
+      chatId =
+        player === "plaintiff" || player === "defendant"
+          ? plaintiffAndDefendant.mainChatId
+          : spectator.mainChatId;
     } else if (index === 1 && player === "spectator") {
-      // モックデータ2をセット
-      setJudgeComments(mockMessages2);
+      chatId = spectator.subChatId;
     }
-  }, [index]);
+
+    if (!chatId) {
+      console.error("Chat ID not found");
+      return;
+    }
+
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.API_URL}/api/chat/${chatId}/message/polling/`,
+          {
+            params: { latest_message_created_at: encodedTimestamp },
+          }
+        );
+
+        const newComments = response.data;
+        if (index === 0) {
+          setParticipantComments(newComments);
+        } else if (index === 1) {
+          setJudgeComments(newComments);
+        }
+
+        const timestamp = new Date().toISOString();
+        setEncodedTimestamp(encodeURIComponent(timestamp));
+        setUpdateAt(timestamp);
+      } catch (error) {
+        console.error("Error polling messages:", error);
+      }
+    };
+
+    const intervalId = setInterval(fetchComments, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [index, updateAt]);
 
   return (
     <div
@@ -52,6 +90,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
                   message={chat.message}
                   time={CalculateTime(chat.created_at)}
                   role={chat.player_role}
+                  message_id={chat.message_id}
                   player={player}
                 />
               ))}
@@ -66,6 +105,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
                   message={chat.message}
                   time={CalculateTime(chat.created_at)}
                   role={chat.player_role}
+                  message_id={chat.message_id}
                   player={player}
                 />
               ))}
@@ -82,7 +122,12 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
           {(index === 0 && player !== "spectator") ||
           (index === 1 && player === "spectator") ? (
             <div className="flex-shrink-0">
-              <CommentForm message={message} setMessage={setMessage} />
+              <CommentForm
+                message={message}
+                setMessage={setMessage}
+                setUpdateAt={setUpdateAt}
+                index={index}
+              />
             </div>
           ) : null}
         </div>

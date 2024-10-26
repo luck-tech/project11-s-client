@@ -1,36 +1,15 @@
 "use client";
 import { Player } from "@/app/components/Player";
-import { useRouter, useParams, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import axios from "axios";
+import useGameState from "@/app/hooks/useGameState";
+import { useParams, useSearchParams } from "next/navigation";
 
 const Waiting = () => {
-  const router = useRouter();
   const { id }: { id: string } = useParams();
   const searchParams = useSearchParams();
   const player = searchParams.get("player");
-  const API_URL = "http://localhost:8000/";
-
   if (!player) return null;
 
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      try {
-        const response = await axios.post(`${API_URL}/api/trial/game_state/`, {
-          trial_id: id,
-        });
-
-        if (response.data.state === "discussion") {
-          clearInterval(interval);
-          router.push(`/${id}/chat?player=${player}`);
-        }
-      } catch (error) {
-        console.error("Error fetching game state:", error);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [id, router]);
+  useGameState({ trialId: id, player: player });
 
   return (
     <>

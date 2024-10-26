@@ -13,7 +13,8 @@ const Chat = () => {
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  // TODO: trial/game_stateにリクエストを1秒間隔で送り、game_stateがshow_final_claim_and_judgeになったら、最終主張画面に飛ばす
+  // TODO: trial/game_stateにリクエストを1秒間隔で送り、game_stateがshow_final_claim_and_judgeになったらどっかに飛ばす（デザイン協議中）
+
   const themeClass =
     player === "plaintiff"
       ? "#E854AC"
