@@ -27,12 +27,12 @@ const ClaimJudgmentStart = ({
   return (
     <>
       <BgImage color={color} />
-      <div className="container mx-auto min-h-screen flex flex-col justify-center items-center gap-8">
+      <div className="container mx-auto px-10 min-h-screen flex flex-col justify-center items-center gap-8">
         <p className="font-bold text-center leading-normal md:leading-normal lg:leading-normal text-4xl md:text-5xl lg:text-6xl p-10">
           {subject}
         </p>
         <h1
-          className={`text-6xl lg:text-[88px] text-center font-bold text-theme-${color} leading-snug`}
+          className={`text-6xl lg:text-[88px] text-center font-bold text-theme-${color} leading-snug whitespace-pre`}
         >
           {title}
         </h1>

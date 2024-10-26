@@ -9,7 +9,7 @@ import { useRecoilValue } from "recoil";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
-async function getClaims(id: string, type: string) {
+export async function getClaims(id: string, type: string) {
   const res = await fetch(`${API_URL}/trial/claims_and_judgments/`, {
     method: "POST",
     headers: {
@@ -32,7 +32,7 @@ const ClaimJudge = () => {
   const player = searchParams.get("player");
   const [claimState, setClaimState] = useState<"start" | "claim">("start");
   const { id }: { id: string } = useParams();
-  const [title, setTitle] = useState({ playerName: "a", sentence: "" });
+  const [title, setTitle] = useState({ playerName: "", sentence: "" });
   const [content, setContent] = useState("");
   const trial = useRecoilValue(trialState);
   const router = useRouter();
@@ -46,7 +46,7 @@ const ClaimJudge = () => {
           console.log("plaintiff claims", claims);
           setTitle({
             playerName: claims.player_name,
-            sentence: "さんの主張を始めます",
+            sentence: "さんの\n主張を始めます",
           });
           setContent(claims.resource);
         } else if (player === "defendant") {
@@ -54,7 +54,7 @@ const ClaimJudge = () => {
           console.log("defendant claims", claims);
           setTitle({
             playerName: claims.player_name,
-            sentence: "さんの主張を始めます",
+            sentence: "さんの\n主張を始めます",
           });
           setContent(claims.resource);
         } else if (player === "judge") {
@@ -100,6 +100,7 @@ const ClaimJudge = () => {
           player={"judge"}
           title={`AI裁判官の暫定判決`}
           content={content}
+          linkHref={`/${id}/play/discussion`}
         />
       ) : claimState === "start" ? (
         <ClaimJudgmentStart
