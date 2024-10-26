@@ -19,7 +19,7 @@ const BgImage = ({
   return (
     <>
       <Image
-        src={`/${color}-bg.png`}
+        src={`/bg-${color}.jpg`}
         alt="bg"
         fill
         className="fixed inset-0 -z-50"
