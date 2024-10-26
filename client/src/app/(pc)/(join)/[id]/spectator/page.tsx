@@ -47,20 +47,21 @@ const JoinSpectator = () => {
   }, []);
 
   return (
-    <div className="text-white text-center flex flex-col justify-center items-center min-h-screen gap-10 md:gap-24 py-8">
-      <div className="bg-neutral-100 text-neutral-800 px-10 py-10 rounded-3xl">
-        <h1 className="text-4xl lg:text-5xl font-bold lg:leading-snug leading-snug">
+    <div className="text-white text-center flex flex-col justify-center items-center min-h-screen gap-10 md:gap-36 py-8 max-w-7xl mx-auto">
+      <div className="bg-[#828282] px-10 py-5 rounded-xl">
+        <h1 className="text-3xl lg:text-[40px] font-medium lg:leading-snug leading-snug">
           {trial.subject}
+          SNSでの名誉毀損による損害賠償請求SNSでの名誉毀損による損害賠償請求SNSでの名誉毀損による損害
         </h1>
       </div>
-      <div className="flex flex-col items-center">
-        <div className="text-4xl lg:text-5xl font-bold text-neutral-800 bg-neutral-100 px-10 py-10 rounded-[50px] mb-10">
+      <div>
+        <div className="text-xl lg:text-2xl font-bold bg-theme-green px-10 py-5 rounded-xl mb-5 lg:mb-20">
           <p>傍聴人のQRコード</p>
         </div>
         <div className="aspect-square max-w-[450px] w-full lg:w-[450px] bg-neutral-100 rounded-lg">
           <QRCodeSVG
-            value={`http://localhost:3000/participation`}
-            className="w-full h-full p-6"
+            value={`http://localhost:3000/${id}/participation?player=spectator`}
+            className="w-full h-full p-6 lg:p-9"
           />
         </div>
       </div>
