@@ -79,12 +79,12 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
               <SubmitForm maxLength={100} player={player} />
             </div>
           )}
-          {index === 0 ||
-            (index === 1 && player === "spectator" && (
-              <div className="flex-shrink-0">
-                <CommentForm message={message} setMessage={setMessage} />
-              </div>
-            ))}
+          {(index === 0 && player !== "spectator") ||
+          (index === 1 && player === "spectator") ? (
+            <div className="flex-shrink-0">
+              <CommentForm message={message} setMessage={setMessage} />
+            </div>
+          ) : null}
         </div>
       )}
     </div>
