@@ -5,7 +5,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
-const API_URL = "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 async function gameState(id: string) {
   const res = await fetch(`${API_URL}/trial/game_state/`, {
@@ -15,7 +15,7 @@ async function gameState(id: string) {
   });
 
   if (!res.ok) {
-    throw new Error(`failed create trial${res.status}`);
+    throw new Error(`failed get game state ${res.status}`);
   }
 
   return await res.json();
