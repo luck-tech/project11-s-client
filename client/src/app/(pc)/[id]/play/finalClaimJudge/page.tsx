@@ -120,7 +120,7 @@ export default FinalClaimJudge;
 
 async function setState(id: string, state: string) {
   const res = await fetch(
-    `https://project7.uni-bo.net//trial/game_state/set/`,
+    `https://project7.uni-bo.net/api/trial/game_state/set/`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

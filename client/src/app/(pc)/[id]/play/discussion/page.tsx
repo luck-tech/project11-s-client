@@ -30,7 +30,7 @@ const Discussion = () => {
     const initializeDiscussion = async () => {
       try {
         await axios.post(
-          `https://project7.uni-bo.net//api/trial/game_state/set/`,
+          `https://project7.uni-bo.net/api/trial/game_state/set/`,
           {
             trial_id: id,
             state: "discussion",

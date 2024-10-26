@@ -10,7 +10,7 @@ const useGameState = ({ trialId, player }: UseGameStateProps) => {
     const interval = setInterval(async () => {
       try {
         const response = await axios.post(
-          `https://project7.uni-bo.net//api/trial/game_state/`,
+          `https://project7.uni-bo.net/api/trial/game_state/`,
           {
             trial_id: trialId,
           }

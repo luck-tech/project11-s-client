@@ -125,15 +125,18 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
 export default SubmitForm;
 
 async function createPlayer(id: string, role: string, playerName: string) {
-  const res = await fetch(`https://project7.uni-bo.net//trial/player/create/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      trial_id: id,
-      role: role,
-      player_name: playerName,
-    }),
-  });
+  const res = await fetch(
+    `https://project7.uni-bo.net/api/trial/player/create/`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        trial_id: id,
+        role: role,
+        player_name: playerName,
+      }),
+    }
+  );
 
   if (!res.ok) {
     throw new Error(`failed create player ${res.status}`);
@@ -149,7 +152,7 @@ async function createClaim(id: string, claim: string) {
   if (!plaintiff_and_defendant) throw new Error(`playerId is not available`);
   const playerId = JSON.parse(plaintiff_and_defendant);
 
-  const res = await fetch(`https://project7.uni-bo.net//trial/claim/`, {
+  const res = await fetch(`https://project7.uni-bo.net/api/trial/claim/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -173,7 +176,7 @@ async function editClaim(id: string, claim: string) {
   if (!plaintiff_and_defendant) throw new Error(`player is not available`);
   const playerId = JSON.parse(plaintiff_and_defendant);
 
-  const res = await fetch(`https://project7.uni-bo.net//trial/claim/`, {
+  const res = await fetch(`https://project7.uni-bo.net/api/trial/claim/`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

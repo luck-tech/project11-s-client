@@ -42,7 +42,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
     const fetchComments = async () => {
       try {
         const response = await axios.get(
-          `https://project7.uni-bo.net//api/chat/${chatId}/message/polling/`,
+          `https://project7.uni-bo.net/api/chat/${chatId}/message/polling/`,
           {
             params: { latest_message_created_at: encodedTimestamp },
           }

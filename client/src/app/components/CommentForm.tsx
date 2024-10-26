@@ -32,7 +32,7 @@ export const CommentForm = ({
 
     try {
       const response = await axios.post(
-        `https://project7.uni-bo.net//api/message/create/`,
+        `https://project7.uni-bo.net/api/message/create/`,
         {
           chat_id: chatId,
           player_id: playerId,

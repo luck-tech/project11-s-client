@@ -5,7 +5,7 @@ import { useSetRecoilState } from "recoil";
 import { trialState } from "@/app/TrialState";
 
 async function createTrial(subject: string) {
-  const res = await fetch("https://project7.uni-bo.net//trial/create/", {
+  const res = await fetch("https://project7.uni-bo.net/api/trial/create/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -9,7 +9,7 @@ const useSlides = (trialId: string) => {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          `https://project7.uni-bo.net//api/trial/projector/discussion/`,
+          `https://project7.uni-bo.net/api/trial/projector/discussion/`,
           {
             trial_id: trialId,
           }

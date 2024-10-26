@@ -18,7 +18,7 @@ export const ChatBubble = ({
   const handleLikeClick = async () => {
     try {
       await axios.post(
-        `https://project7.uni-bo.net//api/message/${message_id}/${
+        `https://project7.uni-bo.net/api/message/${message_id}/${
           isLiked ? "ungood" : "good"
         }/`,
         { player_id: playerId }

@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
 async function gameState(id: string) {
-  const res = await fetch("https://project7.uni-bo.net//trial/game_state/", {
+  const res = await fetch("https://project7.uni-bo.net/api/trial/game_state/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ trial_id: id }),

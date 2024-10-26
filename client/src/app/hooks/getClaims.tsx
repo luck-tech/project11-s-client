@@ -1,6 +1,6 @@
 const getClaims = async (id: string, type: string) => {
   const res = await fetch(
-    "https://project7.uni-bo.net//trial/claims_and_judgments/",
+    "https://project7.uni-bo.net/api/trial/claims_and_judgments/",
     {
       method: "POST",
       headers: {
