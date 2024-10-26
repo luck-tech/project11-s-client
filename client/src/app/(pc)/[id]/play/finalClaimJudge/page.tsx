@@ -118,17 +118,18 @@ const FinalClaimJudge = () => {
 
 export default FinalClaimJudge;
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
-
 async function setState(id: string, state: string) {
-  const res = await fetch(`${API_URL}/trial/game_state/set/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      trial_id: id,
-      state: state,
-    }),
-  });
+  const res = await fetch(
+    `https://project7.uni-bo.net//trial/game_state/set/`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        trial_id: id,
+        state: state,
+      }),
+    }
+  );
 
   if (!res.ok) {
     throw new Error(`failed set state ${res.status}`);

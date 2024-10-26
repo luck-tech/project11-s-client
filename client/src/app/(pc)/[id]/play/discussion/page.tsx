@@ -20,8 +20,6 @@ const Discussion = () => {
   const slides = useSlides(id);
   const currentSlide = useSlideInterval(slides.length, 5000);
 
-  const API_URL = "http://localhost:8000";
-
   useEffect(() => {
     if (timeUp) {
       router.push(`/${id}/play/finalClaimJudge?player=plaintiff`);
@@ -31,10 +29,13 @@ const Discussion = () => {
   useEffect(() => {
     const initializeDiscussion = async () => {
       try {
-        await axios.post(`${API_URL}/api/trial/game_state/set/`, {
-          trial_id: id,
-          state: "discussion",
-        });
+        await axios.post(
+          `https://project7.uni-bo.net//api/trial/game_state/set/`,
+          {
+            trial_id: id,
+            state: "discussion",
+          }
+        );
         startTime();
       } catch (error) {
         console.error("ゲーム状態の設定に失敗しました:", error);

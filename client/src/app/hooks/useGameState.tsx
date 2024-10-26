@@ -5,14 +5,16 @@ import { UseGameStateProps } from "@/app/types/mobile";
 
 const useGameState = ({ trialId, player }: UseGameStateProps) => {
   const router = useRouter();
-  const API_URL = "http://localhost:8000/";
 
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
-        const response = await axios.post(`${API_URL}/api/trial/game_state/`, {
-          trial_id: trialId,
-        });
+        const response = await axios.post(
+          `https://project7.uni-bo.net//api/trial/game_state/`,
+          {
+            trial_id: trialId,
+          }
+        );
 
         if (response.data.state === "discussion") {
           clearInterval(interval);

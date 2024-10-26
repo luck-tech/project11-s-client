@@ -124,10 +124,8 @@ const SubmitForm = ({ maxLength, player }: UserNameInputProps) => {
 
 export default SubmitForm;
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
-
 async function createPlayer(id: string, role: string, playerName: string) {
-  const res = await fetch(`${API_URL}/trial/player/create/`, {
+  const res = await fetch(`https://project7.uni-bo.net//trial/player/create/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -151,7 +149,7 @@ async function createClaim(id: string, claim: string) {
   if (!plaintiff_and_defendant) throw new Error(`playerId is not available`);
   const playerId = JSON.parse(plaintiff_and_defendant);
 
-  const res = await fetch(`${API_URL}/trial/claim/`, {
+  const res = await fetch(`https://project7.uni-bo.net//trial/claim/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -175,7 +173,7 @@ async function editClaim(id: string, claim: string) {
   if (!plaintiff_and_defendant) throw new Error(`player is not available`);
   const playerId = JSON.parse(plaintiff_and_defendant);
 
-  const res = await fetch(`${API_URL}/trial/claim/`, {
+  const res = await fetch(`https://project7.uni-bo.net//trial/claim/`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

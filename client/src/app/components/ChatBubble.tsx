@@ -10,7 +10,6 @@ export const ChatBubble = ({
   message_id,
   player,
 }: ChatBubbleProps) => {
-  const API_URL = "http://localhost:8000";
   const mainPlayer = sessionStorage.getItem("player");
   if (!mainPlayer) throw new Error(`player is not available`);
   const playerId = JSON.parse(mainPlayer);
@@ -19,7 +18,9 @@ export const ChatBubble = ({
   const handleLikeClick = async () => {
     try {
       await axios.post(
-        `${API_URL}/api/message/${message_id}/${isLiked ? "ungood" : "good"}/`,
+        `https://project7.uni-bo.net//api/message/${message_id}/${
+          isLiked ? "ungood" : "good"
+        }/`,
         { player_id: playerId }
       );
 

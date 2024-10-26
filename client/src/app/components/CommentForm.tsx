@@ -10,8 +10,6 @@ export const CommentForm = ({
   setUpdateAt,
   index,
 }: CommentFormProps) => {
-  const API_URL = process.env.API_URL || "http://localhost:8000";
-
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
@@ -33,11 +31,14 @@ export const CommentForm = ({
     }
 
     try {
-      const response = await axios.post(`${API_URL}/api/message/create/`, {
-        chat_id: chatId,
-        player_id: playerId,
-        message: message,
-      });
+      const response = await axios.post(
+        `https://project7.uni-bo.net//api/message/create/`,
+        {
+          chat_id: chatId,
+          player_id: playerId,
+          message: message,
+        }
+      );
       setUpdateAt(response.data.created_at);
       setMessage("");
     } catch (error) {

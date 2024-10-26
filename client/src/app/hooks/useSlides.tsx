@@ -5,13 +5,11 @@ import { Slide } from "@/app/types/pc";
 const useSlides = (trialId: string) => {
   const [slides, setSlides] = useState<Slide[]>([]);
 
-  const API_URL = "http://localhost:8000";
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          `${API_URL}/api/trial/projector/discussion/`,
+          `https://project7.uni-bo.net//api/trial/projector/discussion/`,
           {
             trial_id: trialId,
           }
