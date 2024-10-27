@@ -7,7 +7,7 @@ import { CommentFormProps } from "@/app/types/mobile";
 export const CommentForm = ({
   message,
   setMessage,
-  setUpdateAt,
+  setEncodedTimestamp,
   index,
 }: CommentFormProps) => {
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +39,7 @@ export const CommentForm = ({
           message: message,
         }
       );
-      setUpdateAt(response.data.created_at);
+      setEncodedTimestamp(encodeURIComponent(new Date().toISOString()));
       setMessage("");
     } catch (error) {
       console.error("Error sending message:", error);

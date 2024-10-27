@@ -14,8 +14,9 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   >([]);
   const [judgeComments, setJudgeComments] = useState<ChatResponseProps[]>([]);
   const [message, setMessage] = useState("");
-  const [updateAt, setUpdateAt] = useState("");
-  const [encodedTimestamp, setEncodedTimestamp] = useState("");
+  const [encodedTimestamp, setEncodedTimestamp] = useState(
+    encodeURIComponent(new Date().toISOString())
+  );
 
   const plaintiffAndDefendant = JSON.parse(
     sessionStorage.getItem("plaintiff_and_defendant") || "{}"
@@ -25,19 +26,17 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   useEffect(() => {
     let chatId = "";
 
-    if (index === 0) {
-      chatId =
-        player === "plaintiff" || player === "defendant"
+    chatId =
+      index === 0
+        ? player === "plaintiff" || player === "defendant"
           ? plaintiffAndDefendant.mainChatId
-          : spectator.mainChatId;
-    } else if (index === 1 && player === "spectator") {
-      chatId = spectator.subChatId;
-    } else if (
-      index === 1 &&
-      (player === "plaintiff" || player === "defendant")
-    ) {
-      chatId = plaintiffAndDefendant.mainChatId;
-    }
+          : spectator.mainChatId
+        : index === 1
+        ? player === "spectator"
+          ? spectator.subChatId
+          : plaintiffAndDefendant.mainChatId
+        : null;
+
     console.log("v3");
 
     if (!chatId) {
@@ -60,10 +59,6 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
         } else if (index === 1) {
           setJudgeComments(newComments);
         }
-
-        const timestamp = new Date().toISOString();
-        setEncodedTimestamp(encodeURIComponent(timestamp));
-        setUpdateAt(timestamp);
       } catch (error) {
         console.error("Error polling messages:", error);
       }
@@ -72,7 +67,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
     const intervalId = setInterval(fetchComments, 1000);
 
     return () => clearInterval(intervalId);
-  }, [index, updateAt]);
+  }, [index, encodedTimestamp]);
 
   return (
     <div
@@ -131,7 +126,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
               <CommentForm
                 message={message}
                 setMessage={setMessage}
-                setUpdateAt={setUpdateAt}
+                setEncodedTimestamp={setEncodedTimestamp}
                 index={index}
               />
             </div>
