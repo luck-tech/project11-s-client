@@ -16,42 +16,33 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   const [message, setMessage] = useState("");
   const [updateAt, setUpdateAt] = useState("");
   const [encodedTimestamp, setEncodedTimestamp] = useState("");
-  const [chatId, setChatId] = useState("");
 
   const plaintiffAndDefendant = JSON.parse(
     sessionStorage.getItem("plaintiff_and_defendant") || "{}"
   );
   const spectator = JSON.parse(sessionStorage.getItem("spectator") || "{}");
 
-  useEffect(() => {
-    // Calculate the new chatId based on index and player
-    let newChatId = "";
-
+  const getChatId = () => {
     if (index === 0) {
-      newChatId =
-        player === "plaintiff" || player === "defendant"
-          ? plaintiffAndDefendant.mainChatId
-          : spectator.mainChatId;
+      return player === "plaintiff" || player === "defendant"
+        ? plaintiffAndDefendant.mainChatId
+        : spectator.mainChatId;
     } else if (index === 1 && player === "spectator") {
-      newChatId = spectator.subChatId;
+      return spectator.subChatId;
     }
+    return "";
+  };
 
-    // Only update chatId if it has changed
-    if (newChatId !== chatId) {
-      setChatId(newChatId);
-    }
+  const chatId = getChatId();
 
+  useEffect(() => {
     console.log(`Index: ${index}, Player: ${player}`);
-    console.log(`Chat ID: ${newChatId || "(empty)"}`);
+    console.log(`Chat ID: ${chatId || "(empty)"}`);
 
-    if (!newChatId) {
+    if (!chatId) {
       console.error("Chat ID not found for index", index, "and player", player);
       return;
     }
-  }, [index, player, plaintiffAndDefendant, spectator]);
-
-  useEffect(() => {
-    if (!chatId) return;
 
     const fetchComments = async () => {
       try {
@@ -80,7 +71,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
     const intervalId = setInterval(fetchComments, 1000);
 
     return () => clearInterval(intervalId);
-  }, [chatId, encodedTimestamp, index, updateAt]);
+  }, [chatId, updateAt]);
 
   return (
     <div
