@@ -24,7 +24,6 @@ export interface ChatResponseProps {
 export interface CommentFormProps {
   message: string;
   setMessage: (message: string) => void;
-  setEncodedTimestamp: (encodedTimestamp: string) => void;
   index: number;
 }
 

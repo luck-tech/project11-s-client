@@ -14,10 +14,6 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   >([]);
   const [judgeComments, setJudgeComments] = useState<ChatResponseProps[]>([]);
   const [message, setMessage] = useState("");
-  const [createdAt, setCreatedAt] = useState("");
-  const [encodedTimestamp, setEncodedTimestamp] = useState(
-    encodeURIComponent(new Date().toISOString())
-  );
 
   const plaintiffAndDefendant = JSON.parse(
     sessionStorage.getItem("plaintiff_and_defendant") || "{}"
@@ -120,7 +116,6 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
               <CommentForm
                 message={message}
                 setMessage={setMessage}
-                setEncodedTimestamp={setEncodedTimestamp}
                 index={index}
               />
             </div>
