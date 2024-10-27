@@ -98,16 +98,22 @@ const PDFDom = () => {
   return (
     <div
       id="pdf-id"
-      className="w-[1400px] h-[787px] bg-[#0F1515] border-[5px] border-theme-green py-16 px-8"
+      className="w-[1200px] aspect-video bg-[#0F1515] border-[5px] border-theme-green py-16 px-8"
     >
       <div className="h-full flex flex-col">
-        <Image
+        <div className="flex items-center">
+          {/* <div className="w-2 h-full bg-theme-green"></div> */}
+          <h1 className="text-start font-bold text-4xl text-white">
+            AI裁判結果
+          </h1>
+        </div>
+        {/* <Image
           src={"/pdf-title.png"}
           alt="title"
           width={200}
           height={48}
           className="mb-10"
-        />
+        /> */}
         <ul className="divide-[#4f4f4f] divide-y-4 flex-1 content-center">
           <div className="col-span-4 row-span-1 grid grid-cols-4 gap-x-4 pb-14">
             {contents.slice(0, 4).map((item, i) => (

@@ -61,7 +61,7 @@ const TrialEnd = () => {
       pdf.addImage(imgData, "PNG", 0, 0, slideWidth, slideHeight);
 
       // PDFを保存
-      pdf.save(`test.pdf`);
+      pdf.save(`judge-result.pdf`);
     });
   };
 
@@ -91,7 +91,10 @@ const TrialEnd = () => {
           SNSでシェア
           <Link className="w-10 h-10 md:w-16 md:h-16" />
           </a> */}
-        <div className="-z-50 opacity-0 absolute">
+        <div
+          className="absolute top-0 left-0 w-[1200px] opacity-0 pointer-events-none"
+          aria-hidden="true"
+        >
           <PDFDom />
         </div>
       </div>
