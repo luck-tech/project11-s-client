@@ -1,21 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs, Tab } from "@mui/material";
 import TabPanel from "@/app/components/TabPanel";
-import { useSearchParams, useParams } from "next/navigation";
-import useGameState from "@/app/hooks/useGameState";
+import { useSearchParams, useParams, useRouter } from "next/navigation";
+import axios from "axios";
 
 const Chat = () => {
   const searchParams = useSearchParams();
   const { id }: { id: string } = useParams();
   const player = searchParams.get("player");
   const [value, setValue] = useState(0);
+  const router = useRouter();
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  useGameState({ trialId: id, player: player || "" });
 
   const themeClass =
     player === "plaintiff"
@@ -24,7 +24,31 @@ const Chat = () => {
       ? "#5193E0"
       : "#49C7B0";
 
-  if (!player) return;
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const response = await axios.post(
+          `https://project7.uni-bo.net/api/trial/game_state/`,
+          {
+            trial_id: "123e4567-e89b-12d3-a456-426614174000",
+          }
+        );
+
+        if (response.data.state === "show_final_claim_and_judge") {
+          clearInterval(intervalId);
+          router.push(`/${id}/end`);
+        }
+      } catch (error) {
+        console.error("Error fetching game state:", error);
+        clearInterval(intervalId); // エラーが発生した場合もインターバルを停止
+      }
+    }, 1000); // 1秒ごとにリクエストを送信
+
+    return () => clearInterval(intervalId); // クリーンアップとしてインターバルをクリア
+  }, [id, router]);
+
+  if (!player) return null;
+
   return (
     <>
       <h1 className="p-[20px_36px] text-theme-green text-[18px] leading-[32.4px]">
@@ -74,4 +98,5 @@ const Chat = () => {
     </>
   );
 };
+
 export default Chat;
