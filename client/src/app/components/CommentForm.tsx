@@ -52,7 +52,10 @@ export const CommentForm = ({
         onChange={handleMessageChange}
         className="focus:outline-none flex-grow h-[24px] placeholder-white bg-[#79747E]"
       />
-      <IconButton onClick={handleSendMessage} className="text-white h-[24px]">
+      <IconButton
+        onClick={handleSendMessage}
+        sx={{ color: "white !important" }}
+      >
         <SendIcon />
       </IconButton>
     </div>
