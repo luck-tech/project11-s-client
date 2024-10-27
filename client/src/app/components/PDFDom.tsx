@@ -64,9 +64,8 @@ const formatTrialData = (data: TrialData): ContentType[] => {
   }));
 };
 
-// https://project7.uni-bo.net/api/trial/create/
 async function getPDFContents(id: string) {
-  const res = await fetch(`http://localhost:8000/api/trial/to_pdf/`, {
+  const res = await fetch(`https://project7.uni-bo.net/api/trial/to_pdf/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ trial_id: id }),
