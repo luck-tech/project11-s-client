@@ -10,7 +10,7 @@ import { useRecoilValue } from "recoil";
 import getClaims from "@/app/hooks/getClaims";
 
 const ClaimJudge = () => {
-  const timeLimit = { min: 1, sec: 0 };
+  const timeLimit = { min: 0, sec: 5 };
   const { time, timeUp, startTime } = useTimer(timeLimit);
   const searchParams = useSearchParams();
   const player = searchParams.get("player");

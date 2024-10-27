@@ -32,19 +32,13 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
           : spectator.mainChatId;
     } else if (index === 1 && player === "spectator") {
       chatId = spectator.subChatId;
-      console.log("傍聴人のサブ");
     } else if (
       index === 1 &&
       (player === "plaintiff" || player === "defendant")
     ) {
       chatId = plaintiffAndDefendant.mainChatId;
-      console.log("タブ1のメイン");
-    } else {
-      console.log("ここ");
     }
-    console.log("v2");
-    console.log(`Index: ${index}, Player: ${player}`);
-    console.log(`Chat ID: ${chatId || "(empty)"}`);
+    console.log("v3");
 
     if (!chatId) {
       console.error("Chat ID not found for index", index, "and player", player);

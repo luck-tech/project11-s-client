@@ -11,7 +11,7 @@ export const ChatBubble = ({
   player,
 }: ChatBubbleProps) => {
   const mainPlayer = sessionStorage.getItem("player");
-  if (!mainPlayer) throw new Error(`player is not available`);
+  if (!mainPlayer) throw new Error(`player is not available in Chatbubble`);
   const playerId = JSON.parse(mainPlayer);
 
   const [isLiked, setIsLiked] = useState(false);

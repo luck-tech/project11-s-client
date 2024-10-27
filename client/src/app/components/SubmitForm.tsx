@@ -173,7 +173,8 @@ async function editClaim(id: string, claim: string) {
   const plaintiff_and_defendant = sessionStorage.getItem(
     "plaintiff_and_defendant"
   );
-  if (!plaintiff_and_defendant) throw new Error(`player is not available`);
+  if (!plaintiff_and_defendant)
+    throw new Error(`player is not available  in Submitform`);
   const playerId = JSON.parse(plaintiff_and_defendant);
 
   const res = await fetch(`https://project7.uni-bo.net/api/trial/claim/`, {
