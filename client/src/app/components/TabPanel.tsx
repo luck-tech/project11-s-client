@@ -14,6 +14,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   >([]);
   const [judgeComments, setJudgeComments] = useState<ChatResponseProps[]>([]);
   const [message, setMessage] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
   const [encodedTimestamp, setEncodedTimestamp] = useState(
     encodeURIComponent(new Date().toISOString())
   );
@@ -37,8 +38,6 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
           : plaintiffAndDefendant.mainChatId
         : null;
 
-    console.log("v3");
-
     if (!chatId) {
       console.error("Chat ID not found for index", index, "and player", player);
       return;
@@ -60,9 +59,9 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
         console.error("Error polling messages:", error);
       }
     };
-
-    fetchComments();
-  }, [index, encodedTimestamp]);
+    const intervalId = setInterval(fetchComments, 1000);
+    return () => clearInterval(intervalId);
+  }, [index]);
 
   return (
     <div
