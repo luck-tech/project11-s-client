@@ -32,6 +32,11 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
           : spectator.mainChatId;
     } else if (index === 1 && player === "spectator") {
       chatId = spectator.subChatId;
+    } else if (
+      index === 1 &&
+      (player === "plaintiff" || player === "defendant")
+    ) {
+      chatId = plaintiffAndDefendant.mainChatId;
     }
 
     console.log(`Index: ${index}, Player: ${player}`);
@@ -69,7 +74,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
     const intervalId = setInterval(fetchComments, 1000);
 
     return () => clearInterval(intervalId);
-  }, [updateAt]);
+  }, [index, updateAt]);
 
   return (
     <div
