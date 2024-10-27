@@ -3,17 +3,19 @@
 import React, { useState } from "react";
 import { Tabs, Tab } from "@mui/material";
 import TabPanel from "@/app/components/TabPanel";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useParams } from "next/navigation";
+import useGameState from "@/app/hooks/useGameState";
 
 const Chat = () => {
   const searchParams = useSearchParams();
+  const { id }: { id: string } = useParams();
   const player = searchParams.get("player");
   const [value, setValue] = useState(0);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  // TODO: trial/game_stateにリクエストを1秒間隔で送り、game_stateがshow_final_claim_and_judgeになったらどっかに飛ばす（デザイン協議中）
+  useGameState({ trialId: id, player: player || "" });
 
   const themeClass =
     player === "plaintiff"

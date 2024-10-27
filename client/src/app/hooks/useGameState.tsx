@@ -20,6 +20,10 @@ const useGameState = ({ trialId, player }: UseGameStateProps) => {
           clearInterval(interval);
           router.push(`/${trialId}/chat?player=${player}`);
         }
+        if (response.data.state === "show_final_claim_and_judge") {
+          clearInterval(interval);
+          router.push(`/${trialId}/end`);
+        }
       } catch (error) {
         console.error("Error fetching game state:", error);
       }
