@@ -22,20 +22,18 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   );
   const spectator = JSON.parse(sessionStorage.getItem("spectator") || "{}");
 
-  const getChatId = () => {
-    if (index === 0) {
-      return player === "plaintiff" || player === "defendant"
-        ? plaintiffAndDefendant.mainChatId
-        : spectator.mainChatId;
-    } else if (index === 1 && player === "spectator") {
-      return spectator.subChatId;
-    }
-    return "";
-  };
-
-  const chatId = getChatId();
-
   useEffect(() => {
+    let chatId = "";
+
+    if (index === 0) {
+      chatId =
+        player === "plaintiff" || player === "defendant"
+          ? plaintiffAndDefendant.mainChatId
+          : spectator.mainChatId;
+    } else if (index === 1 && player === "spectator") {
+      chatId = spectator.subChatId;
+    }
+
     console.log(`Index: ${index}, Player: ${player}`);
     console.log(`Chat ID: ${chatId || "(empty)"}`);
 
@@ -71,7 +69,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
     const intervalId = setInterval(fetchComments, 1000);
 
     return () => clearInterval(intervalId);
-  }, [chatId, updateAt]);
+  }, [index, updateAt]);
 
   return (
     <div
