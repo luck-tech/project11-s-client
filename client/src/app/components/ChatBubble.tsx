@@ -10,9 +10,12 @@ export const ChatBubble = ({
   message_id,
   player,
 }: ChatBubbleProps) => {
-  const mainPlayer = sessionStorage.getItem("player");
-  if (!mainPlayer) throw new Error(`player is not available in Chatbubble`);
-  const playerId = JSON.parse(mainPlayer);
+  const plaintiff_and_defendant = sessionStorage.getItem(
+    "plaintiff_and_defendant"
+  );
+  if (!plaintiff_and_defendant)
+    throw new Error(`player is not available in Chatbubble`);
+  const playerData = JSON.parse(plaintiff_and_defendant);
 
   const [isLiked, setIsLiked] = useState(false);
   const handleLikeClick = async () => {
@@ -21,7 +24,7 @@ export const ChatBubble = ({
         `https://project7.uni-bo.net/api/message/${message_id}/${
           isLiked ? "ungood" : "good"
         }/`,
-        { player_id: playerId }
+        { player_id: playerData.playerId }
       );
 
       setIsLiked(!isLiked);

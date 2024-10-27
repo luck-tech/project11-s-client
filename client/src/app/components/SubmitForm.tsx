@@ -149,15 +149,16 @@ async function createClaim(id: string, claim: string) {
   const plaintiff_and_defendant = sessionStorage.getItem(
     "plaintiff_and_defendant"
   );
-  if (!plaintiff_and_defendant) throw new Error(`playerId is not available`);
-  const playerId = JSON.parse(plaintiff_and_defendant);
+  if (!plaintiff_and_defendant)
+    throw new Error(`plaintiff_and_defendant is not available`);
+  const playerData = JSON.parse(plaintiff_and_defendant);
 
   const res = await fetch(`https://project7.uni-bo.net/api/trial/claim/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       trial_id: id,
-      player_id: playerId.playerId,
+      player_id: playerData.playerId,
       claim: claim,
     }),
   });
