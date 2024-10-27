@@ -26,18 +26,20 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
     let chatId = "";
 
     if (index === 0) {
-      chatId =
-        player === "plaintiff" || player === "defendant"
-          ? plaintiffAndDefendant.mainChatId
-          : spectator.mainChatId;
+      if (player === "plaintiff" || player === "defendant") {
+        chatId = plaintiffAndDefendant.mainChatId;
+      } else if (player === "spectator") {
+        chatId = spectator.mainChatId;
+      }
     } else if (index === 1 && player === "spectator") {
       chatId = spectator.subChatId;
     }
-    console.log(index);
-    console.log(chatId);
+
+    console.log(`Index: ${index}, Player: ${player}`);
+    console.log(`Chat ID: ${chatId || "(empty)"}`);
 
     if (!chatId) {
-      console.error("Chat ID not found");
+      console.error("Chat ID not found for index", index, "and player", player);
       return;
     }
 
