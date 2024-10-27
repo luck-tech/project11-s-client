@@ -13,9 +13,14 @@ export const ChatBubble = ({
   const plaintiff_and_defendant = sessionStorage.getItem(
     "plaintiff_and_defendant"
   );
-  if (!plaintiff_and_defendant)
-    throw new Error(`player is not available in Chatbubble`);
-  const playerData = JSON.parse(plaintiff_and_defendant);
+  const spectator = sessionStorage.getItem("spectator");
+  if (!plaintiff_and_defendant && !spectator) {
+    throw new Error("Player data is not available");
+  }
+
+  // nullではない方のデータを使用
+  const data = plaintiff_and_defendant || spectator;
+  const playerData = JSON.parse(data as string);
 
   const [isLiked, setIsLiked] = useState(false);
   const handleLikeClick = async () => {
