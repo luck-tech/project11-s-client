@@ -51,7 +51,7 @@ const TrialEnd = () => {
       const slideHeight = 180; // スライドの高さ
 
       // コンポーネント画像がA4ページに収まるようにスケーリング
-      let pdf = new jsPDF({
+      const pdf = new jsPDF({
         orientation: "landscape",
         unit: "mm",
         format: [slideWidth, slideHeight],
