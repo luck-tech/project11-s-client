@@ -47,8 +47,9 @@ const Chat = () => {
                 ? "参加者コメント(閲覧のみ）"
                 : "参加者コメント"
             }
-            className="w-6/12 p-[14px_16px] text-[12px] text-white"
+            className="w-6/12 p-[14px_16px] text-[12px]"
             sx={{
+              color: "white",
               "&.Mui-selected": {
                 color: themeClass,
               },
@@ -56,8 +57,9 @@ const Chat = () => {
           />
           <Tab
             label={player == "spectator" ? "AI裁判官とのチャット" : "主張編集"}
-            className="w-6/12 text-[12px] text-white"
+            className="w-6/12 text-[12px]"
             sx={{
+              color: "white",
               "&.Mui-selected": {
                 color: themeClass,
               },
