@@ -54,7 +54,7 @@ const JoinPlayer = () => {
       <div className="flex flex-col md:flex-row gap-10 md:gap-0 items-center justify-between w-full">
         <div>
           <div className="text-xl lg:text-2xl font-bold bg-theme-pink px-10 py-5 rounded-xl mb-5 lg:mb-20">
-            <p>Player A QRコード</p>
+            <p>PlayerA(原告) QRコード</p>
           </div>
           <div className="aspect-square max-w-[450px] lg:w-[450px] bg-white rounded-xl">
             <QRCodeSVG
@@ -65,7 +65,7 @@ const JoinPlayer = () => {
         </div>
         <div>
           <div className="text-xl lg:text-2xl font-bold bg-theme-blue px-10 py-5 rounded-xl mb-5 lg:mb-20">
-            <p>Player B QRコード</p>
+            <p>PlayerB(被告) QRコード</p>
           </div>
           <div className="aspect-square max-w-[450px] lg:w-[450px] bg-white rounded-xl">
             <QRCodeSVG
