@@ -25,20 +25,17 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   useEffect(() => {
     let chatId = "";
 
-    if (index === 0) {
-      chatId =
-        player === "plaintiff" || player === "defendant"
+    chatId =
+      index === 0
+        ? player === "plaintiff" || player === "defendant"
           ? plaintiffAndDefendant.mainChatId
-          : spectator.mainChatId;
-    } else if (index === 1 && player === "spectator") {
-      chatId = spectator.subChatId;
-    } else if (
-      index === 1 &&
-      (player === "plaintiff" || player === "defendant")
-    ) {
-      chatId = plaintiffAndDefendant.mainChatId;
-    }
-
+          : spectator.mainChatId
+        : index === 1
+        ? player === "spectator"
+          ? spectator.subChatId
+          : plaintiffAndDefendant.mainChatId
+        : null;
+    console.log(`v2`);
     console.log(`Index: ${index}, Player: ${player}`);
     console.log(`Chat ID: ${chatId || "(empty)"}`);
 
