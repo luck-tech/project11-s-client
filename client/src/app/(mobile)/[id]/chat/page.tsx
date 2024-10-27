@@ -40,12 +40,12 @@ const Chat = () => {
         }
       } catch (error) {
         console.error("Error fetching game state:", error);
-        clearInterval(intervalId); // エラーが発生した場合もインターバルを停止
+        clearInterval(intervalId);
       }
-    }, 1000); // 1秒ごとにリクエストを送信
+    }, 1000);
 
-    return () => clearInterval(intervalId); // クリーンアップとしてインターバルをクリア
-  }, [id, router]);
+    return () => clearInterval(intervalId);
+  }, [id]);
 
   if (!player) return null;
 
