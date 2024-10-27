@@ -25,17 +25,24 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
   useEffect(() => {
     let chatId = "";
 
-    chatId =
-      index === 0
-        ? player === "plaintiff" || player === "defendant"
+    if (index === 0) {
+      chatId =
+        player === "plaintiff" || player === "defendant"
           ? plaintiffAndDefendant.mainChatId
-          : spectator.mainChatId
-        : index === 1
-        ? player === "spectator"
-          ? spectator.subChatId
-          : plaintiffAndDefendant.mainChatId
-        : null;
-    console.log(`v2`);
+          : spectator.mainChatId;
+    } else if (index === 1 && player === "spectator") {
+      chatId = spectator.subChatId;
+      console.log("傍聴人のサブ");
+    } else if (
+      index === 1 &&
+      (player === "plaintiff" || player === "defendant")
+    ) {
+      chatId = plaintiffAndDefendant.mainChatId;
+      console.log("タブ1のメイン");
+    } else {
+      console.log("ここ");
+    }
+    console.log("v2");
     console.log(`Index: ${index}, Player: ${player}`);
     console.log(`Chat ID: ${chatId || "(empty)"}`);
 
