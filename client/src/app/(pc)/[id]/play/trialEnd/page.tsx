@@ -1,6 +1,6 @@
 "use client";
 import BgImage from "@/app/components/BgImage";
-import { Download, Link } from "@mui/icons-material";
+import { Download } from "@mui/icons-material";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import PDFDom from "@/app/components/PDFDom";
