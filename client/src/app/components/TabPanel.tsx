@@ -69,7 +69,7 @@ const TabPanel = ({ value, index, player }: TabPanelProps) => {
     const intervalId = setInterval(fetchComments, 1000);
 
     return () => clearInterval(intervalId);
-  }, [index, updateAt]);
+  }, [updateAt]);
 
   return (
     <div
