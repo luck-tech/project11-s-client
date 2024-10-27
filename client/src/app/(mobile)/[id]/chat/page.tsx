@@ -30,7 +30,7 @@ const Chat = () => {
         const response = await axios.post(
           `https://project7.uni-bo.net/api/trial/game_state/`,
           {
-            trial_id: "123e4567-e89b-12d3-a456-426614174000",
+            trial_id: id,
           }
         );
 
